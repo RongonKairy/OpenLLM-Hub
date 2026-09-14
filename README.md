@@ -198,7 +198,7 @@ This project is licensed under the **MIT License** — free to use, share, and m
 
 ## 👨‍💻 Made by
 
-**Preatom YT** — [@preatomytofficial](https://github.com/preatomytofficial)
+**Rongon Kairy** — [@RongonKairy](https://github.com/RongonKairy)
 
 > ⭐ If you like this project, please give it a **star** on GitHub!
 READMEEOF

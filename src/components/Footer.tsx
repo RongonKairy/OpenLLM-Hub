@@ -40,9 +40,9 @@ export const Footer: React.FC<FooterProps> = ({ onScrollTo, onOpenSocialModal })
                   id="footer-creator-btn"
                   onClick={onOpenSocialModal}
                   className="inline-flex items-center gap-1 rounded-lg bg-blue-500/10 px-2 py-0.5 font-bold text-blue-400 hover:bg-blue-500/20 hover:text-blue-300 transition-all border border-blue-500/30 cursor-pointer shadow-sm"
-                  title="Click to view Preatom YT social channels"
+                  title="Click to view Rongon Kairy social channels"
                 >
-                  <span>Preatom YT</span>
+                  <span>Rongon Kairy</span>
                   <ExternalLink className="h-3 w-3" />
                 </button>
               </span>
@@ -59,7 +59,7 @@ export const Footer: React.FC<FooterProps> = ({ onScrollTo, onOpenSocialModal })
                 className="inline-flex items-center gap-2 rounded-xl bg-zinc-900/90 border border-white/10 hover:border-blue-500/40 px-3.5 py-2 text-xs font-semibold text-zinc-200 hover:text-white transition-all cursor-pointer shadow-inner hover:bg-zinc-850"
               >
                 <Share2 className="h-3.5 w-3.5 text-blue-400" />
-                <span>Connect with Preatom YT (Social Profiles)</span>
+                <span>Connect with Rongon Kairy (Social Profiles)</span>
               </button>
             </div>
           </div>
@@ -81,12 +81,12 @@ export const Footer: React.FC<FooterProps> = ({ onScrollTo, onOpenSocialModal })
                 </button>
               </li>
               <li>
-                <a href="https://preatomyt.com" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
-                  Preatom YT Official Website
+                <a href="https://github.com/rongonkairy" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
+                  GitHub Profile
                 </a>
               </li>
               <li>
-                <a href="https://www.youtube.com/@PreatomYTOfficial" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
+                <a href="https://www.youtube.com/@rongonkairy" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
                   YouTube Channel
                 </a>
               </li>
@@ -123,7 +123,7 @@ export const Footer: React.FC<FooterProps> = ({ onScrollTo, onOpenSocialModal })
               onClick={onOpenSocialModal}
               className="text-blue-400 hover:text-blue-300 font-bold underline underline-offset-4 decoration-blue-500/40 hover:decoration-blue-400 transition-all cursor-pointer inline-flex items-center gap-1"
             >
-              Preatom YT
+              Rongon Kairy.
               <ExternalLink className="h-3 w-3 inline" />
             </button>
           </p>

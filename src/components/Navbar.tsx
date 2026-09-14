@@ -150,10 +150,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             id="nav-creator-social-btn"
             onClick={onOpenSocialModal}
             className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-red-600/20 to-rose-600/20 border border-red-500/30 hover:border-red-400/50 text-red-300 hover:text-white px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer shadow-sm"
-            title="Creator: Preatom YT (YouTube & Profile Links)"
+            title="Creator: Rongon Kairy (Social & Profile Links)"
           >
             <span className="flex h-2 w-2 rounded-full bg-red-500 animate-pulse" />
-            <span>Preatom YT</span>
+            <span>Rongon Kairy</span>
           </button>
         </nav>
 

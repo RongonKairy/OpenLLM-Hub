@@ -49,34 +49,34 @@ export const SocialModal: React.FC<SocialModalProps> = ({ isOpen, onClose }) => 
   const socialLinks: SocialLink[] = [
     {
       name: 'YouTube',
-      url: 'https://www.youtube.com/@PreatomYTOfficial',
+      url: 'https://www.youtube.com/@rongonkairy',
       icon: <Youtube className="h-5 w-5 text-red-500" />,
       color: 'hover:border-red-500/50 hover:bg-red-500/10 group-hover:text-red-400',
       badge: '▶️ Official Channel',
       description: 'AI tutorials, LLM benchmarks, fine-tuning guides & tech reviews',
-      handle: '@PreatomYTOfficial'
+      handle: '@rongonkairy'
     },
     {
       name: 'Facebook',
-      url: 'https://www.facebook.com/preatomyt',
+      url: 'https://www.facebook.com/rongonkairy',
       icon: <Facebook className="h-5 w-5 text-blue-500" />,
       color: 'hover:border-blue-500/50 hover:bg-blue-500/10 group-hover:text-blue-400',
       badge: '📘 Official Page',
       description: 'Community updates, tech news & direct communication',
-      handle: 'facebook.com/preatomyt'
+      handle: 'facebook.com/rongonkairy'
     },
     {
       name: 'Instagram',
-      url: 'https://www.instagram.com/preatomyt/',
+      url: 'https://www.instagram.com/rongonkairy/',
       icon: <Instagram className="h-5 w-5 text-pink-500" />,
       color: 'hover:border-pink-500/50 hover:bg-pink-500/10 group-hover:text-pink-400',
       badge: '📸 Tech & Life',
       description: 'Behind the scenes, quick AI tips & visual updates',
-      handle: '@preatomyt'
+      handle: '@rongonkairy'
     },
     {
       name: 'X (Twitter)',
-      url: 'https://x.com/Preatom_YT',
+      url: 'https://x.com/rongonkairy',
       icon: (
         <span className="font-extrabold text-sm font-sans tracking-tighter text-zinc-100 flex items-center justify-center w-5 h-5">
           𝕏
@@ -85,52 +85,52 @@ export const SocialModal: React.FC<SocialModalProps> = ({ isOpen, onClose }) => 
       color: 'hover:border-white/50 hover:bg-white/10 group-hover:text-white',
       badge: '𝕏 Tweets & Threads',
       description: 'Fast-paced AI announcements, releases & discussions',
-      handle: '@Preatom_YT'
+      handle: '@rongonkairy'
     },
     {
       name: 'Telegram Channel',
-      url: 'https://t.me/PreatomYT',
+      url: 'https://t.me/rongonkairy',
       icon: <Send className="h-5 w-5 text-sky-400" />,
       color: 'hover:border-sky-500/50 hover:bg-sky-500/10 group-hover:text-sky-400',
       badge: '📢 Direct Updates',
       description: 'Instant model download links, prompts & early releases',
-      handle: 't.me/PreatomYT'
+      handle: 't.me/rongonkairy'
     },
     {
       name: 'GitHub',
-      url: 'https://github.com/Preatomytofficial',
+      url: 'https://github.com/rongonkairy',
       icon: <Github className="h-5 w-5 text-zinc-200" />,
       color: 'hover:border-purple-500/50 hover:bg-purple-500/10 group-hover:text-purple-300',
       badge: '💻 Open Source Code',
       description: 'Open source LLM training scripts, configs & web projects',
-      handle: '@Preatomytofficial'
+      handle: '@rongonkairy'
     },
     {
       name: 'Official Website',
-      url: 'https://preatomyt.com',
+      url: 'https://rongonkairy.vercel.app',
       icon: <Globe className="h-5 w-5 text-emerald-400" />,
       color: 'hover:border-emerald-500/50 hover:bg-emerald-500/10 group-hover:text-emerald-300',
       badge: '🌐 Official Portal',
       description: 'Articles, tools, contact information & projects archive',
-      handle: 'preatomyt.com'
+      handle: 'rongonkairy.vercel.app'
     },
     {
       name: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/preatomyt',
+      url: 'https://www.linkedin.com/in/rongonkairy',
       icon: <Linkedin className="h-5 w-5 text-blue-400" />,
       color: 'hover:border-blue-400/50 hover:bg-blue-400/10 group-hover:text-blue-300',
       badge: '💼 Professional Network',
       description: 'Professional background, collaborations & tech ventures',
-      handle: 'in/preatomyt'
+      handle: 'in/rongonkairy'
     },
     {
       name: 'Reddit',
-      url: 'https://www.reddit.com/user/PreatomYT',
+      url: 'https://www.reddit.com/user/rongonkairy',
       icon: <Share2 className="h-5 w-5 text-orange-500" />,
       color: 'hover:border-orange-500/50 hover:bg-orange-500/10 group-hover:text-orange-400',
       badge: '💬 Community Discussion',
       description: 'OpenLLM Hub feedback, discussions & AI debates',
-      handle: 'u/PreatomYT'
+      handle: 'u/rongonkairy'
     }
   ];
 
@@ -156,7 +156,7 @@ export const SocialModal: React.FC<SocialModalProps> = ({ isOpen, onClose }) => 
         <div className="flex items-center justify-between border-b border-white/10 pb-4">
           <div className="flex items-center gap-3">
             <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-extrabold text-lg shadow-[0_0_20px_rgba(59,130,246,0.4)] border border-white/20">
-              PY
+              RK
               <span className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-black text-[10px] font-bold ring-2 ring-zinc-950">
                 ✓
               </span>
@@ -164,7 +164,7 @@ export const SocialModal: React.FC<SocialModalProps> = ({ isOpen, onClose }) => 
             <div>
               <div className="flex items-center gap-1.5">
                 <h3 className="text-lg font-bold text-white tracking-tight">
-                  Preatom YT
+                  Rongon Kairy
                 </h3>
                 <CheckCircle2 className="h-4 w-4 text-blue-400 fill-blue-400/20" />
                 <span className="rounded-full bg-blue-500/10 px-2 py-0.5 text-[10px] font-bold text-blue-400 border border-blue-500/20">
@@ -194,7 +194,7 @@ export const SocialModal: React.FC<SocialModalProps> = ({ isOpen, onClose }) => 
           <Sparkles className="h-5 w-5 text-cyan-400 shrink-0 mt-0.5" />
           <div className="text-xs">
             <p className="text-zinc-200 font-medium leading-relaxed">
-              Welcome to the official developer profile of <strong className="text-white">Preatom YT</strong>. Follow on social channels for new open-source AI model releases, fine-tuning benchmarks, and video tutorials.
+              Welcome to the official developer profile of <strong className="text-white">Rongon Kairy</strong>. Follow on social channels for new open-source AI model releases, fine-tuning benchmarks, and video tutorials.
             </p>
           </div>
         </div>
@@ -252,7 +252,7 @@ export const SocialModal: React.FC<SocialModalProps> = ({ isOpen, onClose }) => 
         {/* Footer info & Cross Bar bottom button */}
         <div className="mt-5 pt-3 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-zinc-500">
           <p>
-            © 2026 OpenLLM Hub • Created By <span className="text-zinc-300 font-semibold">Preatom YT</span>
+            © 2026 OpenLLM Hub. Creat By <span className="text-zinc-300 font-semibold">Rongon Kairy.</span>
           </p>
           <div className="flex items-center gap-2">
             <button

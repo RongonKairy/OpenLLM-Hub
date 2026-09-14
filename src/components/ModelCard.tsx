@@ -82,14 +82,14 @@ export const ModelCard: React.FC<ModelCardProps> = ({
               </div>
               <p className="text-xs text-zinc-400">
                 {model.baseArchitecture} •{' '}
-                {model.creator === 'Preatom YT' && onOpenSocialModal ? (
+                {(model.creator === 'Rongon Kairy' || model.creator === 'Preatom YT') && onOpenSocialModal ? (
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       onOpenSocialModal();
                     }}
                     className="font-semibold text-red-400 hover:text-red-300 hover:underline transition-colors inline-flex items-center gap-1 cursor-pointer"
-                    title="Click to view Preatom YT profile"
+                    title="Click to view Rongon Kairy profile"
                   >
                     <span>{model.creator}</span>
                     <span className="text-[10px] bg-red-500/20 text-red-300 px-1 rounded font-bold">PRO</span>

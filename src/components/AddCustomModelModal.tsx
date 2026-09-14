@@ -24,7 +24,7 @@ export const AddCustomModelModal: React.FC<AddCustomModelModalProps> = ({
   const [description, setDescription] = useState('');
   const [ollamaCommand, setOllamaCommand] = useState('');
   const [huggingFaceRepo, setHuggingFaceRepo] = useState('');
-  const [creator, setCreator] = useState('Preatom YT');
+  const [creator, setCreator] = useState('Rongon Kairy');
   const [minVramGb, setMinVramGb] = useState(5.5);
   const [quantSize, setQuantSize] = useState('4.8 GB');
 

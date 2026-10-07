@@ -29,12 +29,14 @@ interface ModelCardProps {
   model: LLMModel;
   onDownload: (model: LLMModel, quant: QuantizationOption) => void;
   onOpenSocialModal?: () => void;
+  onOpenOllamaModal?: (model: LLMModel) => void;
 }
 
 export const ModelCard: React.FC<ModelCardProps> = ({
   model,
   onDownload,
-  onOpenSocialModal
+  onOpenSocialModal,
+  onOpenOllamaModal
 }) => {
   const [copiedOllama, setCopiedOllama] = useState(false);
   const [copiedHfLink, setCopiedHfLink] = useState(false);
@@ -216,22 +218,36 @@ export const ModelCard: React.FC<ModelCardProps> = ({
               <span className="flex items-center gap-1 font-mono text-cyan-400">
                 <Terminal className="h-3 w-3" /> {model.ollamaCommand.startsWith('ollama launch') ? 'Ollama CLI Launch' : 'Ollama 1-Line Run'}
               </span>
-              <button
-                onClick={copyOllama}
-                className="flex items-center gap-1 text-[10px] font-semibold text-zinc-400 hover:text-white transition-colors cursor-pointer"
-              >
-                {copiedOllama ? (
-                  <>
-                    <Check className="h-3 w-3 text-emerald-400" />
-                    <span className="text-emerald-400">Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="h-3 w-3" />
-                    <span>Copy Command</span>
-                  </>
+              <div className="flex items-center gap-1.5">
+                {onOpenOllamaModal && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onOpenOllamaModal(model);
+                    }}
+                    className="flex items-center gap-1 text-[10px] font-bold text-sky-400 hover:text-sky-300 transition-colors cursor-pointer bg-sky-500/10 hover:bg-sky-500/20 px-2 py-0.5 rounded border border-sky-500/20"
+                    title="Open in Ollama LLM Runner Modal"
+                  >
+                    <span>🦙 Open Runner</span>
+                  </button>
                 )}
-              </button>
+                <button
+                  onClick={copyOllama}
+                  className="flex items-center gap-1 text-[10px] font-semibold text-zinc-400 hover:text-white transition-colors cursor-pointer"
+                >
+                  {copiedOllama ? (
+                    <>
+                      <Check className="h-3 w-3 text-emerald-400" />
+                      <span className="text-emerald-400">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-3 w-3" />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
             <div className="font-mono text-xs text-zinc-200 select-all overflow-x-auto whitespace-nowrap">
               {model.ollamaCommand}
@@ -490,18 +506,31 @@ export const ModelCard: React.FC<ModelCardProps> = ({
             <ExternalLink className="h-3 w-3 opacity-70" />
           </a>
         ) : (
-          <a
-            href={ollamaDetailsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            id={`btn-ollama-details-${model.id}`}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/30 px-3 py-2 text-xs font-bold text-sky-300 transition-all cursor-pointer shadow-sm hover:scale-[1.02]"
-            title={`Open ${model.name} Ollama Model Details`}
-          >
-            <span className="text-sm leading-none">🦙</span>
-            <span>Ollama Details</span>
-            <ExternalLink className="h-3 w-3 opacity-70" />
-          </a>
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {onOpenOllamaModal && (
+              <button
+                type="button"
+                onClick={() => onOpenOllamaModal(model)}
+                id={`btn-ollama-runner-${model.id}`}
+                className="inline-flex items-center gap-1 rounded-xl bg-sky-500/15 hover:bg-sky-500/25 border border-sky-500/35 px-2.5 py-2 text-xs font-bold text-sky-300 transition-all cursor-pointer shadow-sm hover:scale-[1.02]"
+                title={`Run ${model.name} in Ollama Modal`}
+              >
+                <span className="text-sm leading-none">🦙</span>
+                <span>Run with Ollama</span>
+              </button>
+            )}
+            <a
+              href={ollamaDetailsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              id={`btn-ollama-details-${model.id}`}
+              className="inline-flex items-center gap-1 rounded-xl bg-zinc-800/80 hover:bg-zinc-800 border border-white/10 px-2.5 py-2 text-xs font-semibold text-zinc-300 hover:text-white transition-all cursor-pointer shadow-sm"
+              title={`Open ${model.name} Ollama Model Details`}
+            >
+              <span>Library</span>
+              <ExternalLink className="h-3 w-3 opacity-70" />
+            </a>
+          </div>
         )}
 
         {/* Clean Size Display Badge */}

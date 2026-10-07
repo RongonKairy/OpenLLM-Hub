@@ -10,6 +10,7 @@ import { ModelCard } from './components/ModelCard';
 import { DownloadToast } from './components/DownloadToast';
 import { Footer } from './components/Footer';
 import { SocialModal } from './components/SocialModal';
+import { OllamaModal } from './components/OllamaModal';
 
 import { MODELS_DATA, TOTAL_STATS } from './data/models';
 import { LLMModel, ModelCategory, ModelScope, QuantizationOption } from './types';
@@ -30,10 +31,47 @@ export default function App() {
   const [paramFilter, setParamFilter] = useState<string>('all'); // all | small | medium | large
   const [sortBy, setSortBy] = useState<'popular' | 'downloads' | 'rating' | 'size'>('popular');
   const [isSocialModalOpen, setIsSocialModalOpen] = useState(false);
+  const [isOllamaModalOpen, setIsOllamaModalOpen] = useState(false);
+  const [selectedOllamaModel, setSelectedOllamaModel] = useState<LLMModel | null>(null);
 
-  const allAvailableModels = MODELS_DATA;
+  // User custom models (persisted in localStorage)
+  const [customModels, setCustomModels] = useState<LLMModel[]>(() => {
+    try {
+      const saved = localStorage.getItem('openllm_hub_custom_models');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const allAvailableModels = useMemo(() => {
+    return [...customModels, ...MODELS_DATA];
+  }, [customModels]);
 
   const [activeDownload, setActiveDownload] = useState<{ model: LLMModel; quant: QuantizationOption } | null>(null);
+
+  const handleOpenOllamaModal = (model?: LLMModel) => {
+    if (model) {
+      setSelectedOllamaModel(model);
+    } else {
+      setSelectedOllamaModel(null);
+    }
+    setIsOllamaModalOpen(true);
+  };
+
+  const handleAddNewModel = (newModel: LLMModel) => {
+    setCustomModels((prev) => {
+      const next = [newModel, ...prev];
+      try {
+        localStorage.setItem('openllm_hub_custom_models', JSON.stringify(next));
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+    // Switch to 'my_llm' so user immediately sees their new model!
+    setSelectedScope('my_llm');
+  };
 
   // Calculate scope counts
   const publicCount = useMemo(() => {
@@ -160,6 +198,7 @@ export default function App() {
         onScrollToModels={scrollToModels}
         myLlmCount={myLlmCount}
         onOpenSocialModal={() => setIsSocialModalOpen(true)}
+        onOpenOllamaModal={() => handleOpenOllamaModal()}
       />
 
       {/* 2. Hero Section */}
@@ -177,6 +216,7 @@ export default function App() {
         categoryCounts={categoryCounts}
         totalDownloads={TOTAL_STATS.totalDownloads}
         onExploreClick={scrollToModels}
+        onOpenOllamaModal={() => handleOpenOllamaModal()}
       />
 
       {/* 3. Main Models Catalog Grid Section */}
@@ -346,6 +386,7 @@ export default function App() {
                 model={model}
                 onDownload={handleDownload}
                 onOpenSocialModal={() => setIsSocialModalOpen(true)}
+                onOpenOllamaModal={(m) => handleOpenOllamaModal(m)}
               />
             ))}
           </div>
@@ -378,6 +419,15 @@ export default function App() {
       <Footer
         onScrollTo={scrollToModels}
         onOpenSocialModal={() => setIsSocialModalOpen(true)}
+      />
+
+      {/* Ollama LLM Runner & Custom Model Builder Modal */}
+      <OllamaModal
+        isOpen={isOllamaModalOpen}
+        onClose={() => setIsOllamaModalOpen(false)}
+        models={allAvailableModels}
+        initialModel={selectedOllamaModel}
+        onAddNewModel={handleAddNewModel}
       />
 
       {/* Creator Social Media Popup Modal */}

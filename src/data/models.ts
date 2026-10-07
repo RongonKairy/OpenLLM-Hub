@@ -730,6 +730,210 @@ print(response['message']['content'])`,
   // 2. 20 POPULAR OLLAMA LLM MODELS (from ollama.com/search)
   // ----------------------------------------------------
   {
+    id: 'deepseek-r1-70b',
+    name: 'deepseek-r1:70b',
+    slug: 'deepseek-r1-70b',
+    tagline: 'Flagship 70B distilled reasoning model with extreme math and coding capability',
+    taglineBn: 'শীর্ষস্থানীয় ৭০ বিলিয়ন প্যারামিটারের ডিপ রিজনিং ও ম্যাথ মডেল',
+    description: 'DeepSeek-R1-Distill-Llama-70B offers frontier-tier performance on AIME, MATH, and HumanEval. Preserves complete thinking traces, chain-of-thought deductions, and rigorous formal derivations.',
+    descriptionBn: 'মেটার লামা ৩.৩ আর্কিটেকচারে ডিস্টিল করা ৭০ বিলিয়ন ডিপসিক-আর১ মডেল যা জটিল গণিত ও কোডিংয়ে অভূতপূর্ব দক্ষ।',
+    creator: 'DeepSeek',
+    avatarIcon: 'BrainCircuit',
+    baseArchitecture: 'Llama-3.3 + DeepSeek R1 Distill',
+    parameterSize: '70B',
+    paramNumber: 70.0,
+    category: 'reasoning',
+    modelScope: 'public',
+    contextWindow: '128K',
+    license: 'MIT (Open Source)',
+    releaseDate: '2026-02-15',
+    downloadsCount: 14200000,
+    likesCount: 420000,
+    rating: 4.99,
+    isFeatured: true,
+    isTrending: true,
+    isNew: true,
+    benchmarks: {
+      mmlu: 92.4,
+      codingHumanEval: 94.2,
+      mathGsm8k: 97.4,
+      banglaNlpScore: 90.0,
+      reasoningArc: 96.8,
+      tokensPerSec: 36
+    },
+    minVramGb: 38.0,
+    recommendedVramGb: 48.0,
+    minCpuRamGb: 64.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '42.8 GB',
+        bytes: 45956128000,
+        filename: 'deepseek-r1-distill-llama-70b-q4_k_m.gguf',
+        downloadUrl: 'https://ollama.com/library/deepseek-r1:70b',
+        recommendedVram: '48 GB VRAM (Dual RTX 3090/4090 or Apple M-series 64GB)',
+        recommendedFor: 'Frontier reasoning, competition-level mathematics & system design',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run deepseek-r1:70b',
+    huggingFaceRepo: 'deepseek-ai/DeepSeek-R1-Distill-Llama-70B',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(model='deepseek-r1:70b', messages=[{'role': 'user', 'content': 'Prove that any planar graph has chromatic number at most 4.'}])\nprint(response['message']['content'])`,
+    tags: ['Public LLM', 'Ollama', 'deepseek', 'r1', '70b', 'reasoning', 'math', 'frontier'],
+    features: [
+      'Full 70B frontier mathematical deduction and chain-of-thought reasoning',
+      'Ultra-high HumanEval code generation accuracy',
+      'Single-command deployment with ollama run deepseek-r1:70b'
+    ],
+    featuresBn: ['৭০ বিলিয়ন প্যারামিটার ডিপ রিজনিং', 'উচ্চমানের চেইন-অব-থট প্রুফ', 'ওলামা ১-ক্লিক রান'],
+    trainingTokens: 'Reinforcement Learning CoT & Llama-3.3 Backbone',
+    samplePrompts: [
+      {
+        id: 'r1-70b-p1',
+        title: 'Rigorous Mathematical Derivation',
+        prompt: 'Formulate an end-to-end formal proof for the convergence of policy gradients in non-stationary MDPs.',
+        response: '<think>\nSetting up stochastic approximation bounds...\n</think>\nHere is the rigorous proof structure...',
+        category: 'Reasoning'
+      }
+    ]
+  },
+  {
+    id: 'qwen2-5-coder-32b',
+    name: 'qwen2.5-coder:32b',
+    slug: 'qwen2-5-coder-32b',
+    tagline: 'Heavyweight 32B coding specialist with 128K context for massive repositories',
+    taglineBn: '৩২ বিলিয়ন প্যারামিটারের হেভিওয়েট কোডিং স্পেশালিস্ট মডেল',
+    description: 'Qwen2.5-Coder 32B matches frontier proprietary models on HumanEval and SWE-bench. Capable of analyzing thousands of lines of code across entire git repositories in a single prompt.',
+    descriptionBn: 'সম্পূর্ণ গিট রিপোজিটরি বিশ্লেষণ ও রিফ্যাক্টরিংয়ে সক্ষম ৩২ বিলিয়ন কোডিং স্পেশালিস্ট মডেল।',
+    creator: 'Qwen / Alibaba',
+    avatarIcon: 'Code2',
+    baseArchitecture: 'Qwen 2.5 Code 32B',
+    parameterSize: '32B',
+    paramNumber: 32.0,
+    category: 'coding',
+    modelScope: 'public',
+    contextWindow: '128K',
+    license: 'Apache-2.0',
+    releaseDate: '2026-03-05',
+    downloadsCount: 7600000,
+    likesCount: 220000,
+    rating: 4.98,
+    isFeatured: true,
+    isTrending: true,
+    isNew: true,
+    benchmarks: {
+      mmlu: 89.4,
+      codingHumanEval: 93.8,
+      mathGsm8k: 92.1,
+      banglaNlpScore: 86.0,
+      reasoningArc: 91.5,
+      tokensPerSec: 52
+    },
+    minVramGb: 18.0,
+    recommendedVramGb: 24.0,
+    minCpuRamGb: 32.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '19.8 GB',
+        bytes: 21260000000,
+        filename: 'qwen2.5-coder-32b-instruct-q4_k_m.gguf',
+        downloadUrl: 'https://ollama.com/library/qwen2.5-coder:32b',
+        recommendedVram: '20-24 GB VRAM (RTX 3090/4090 or Apple M 32GB)',
+        recommendedFor: 'Full-repository refactoring, AST transformations, and architectural design',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run qwen2.5-coder:32b',
+    huggingFaceRepo: 'Qwen/Qwen2.5-Coder-32B-Instruct',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(model='qwen2.5-coder:32b', messages=[{'role': 'user', 'content': 'Architect an asynchronous event-driven microservices kernel in Go' }])\nprint(response['message']['content'])`,
+    tags: ['Public LLM', 'Ollama', 'coding', 'qwen', '32b', 'swe-bench', 'architect'],
+    features: [
+      'Massive 128,000 token context window for reading whole repos',
+      'Matches closed frontier models on SWE-bench and HumanEval',
+      '1-line launch with ollama run qwen2.5-coder:32b'
+    ],
+    featuresBn: ['১২৮কে কোড কনটেক্সট', '৩২ বিলিয়ন প্যারামিটার', 'হাই পারফরম্যান্স সফটওয়্যার আর্কিটেকচার'],
+    trainingTokens: '5.5 Trillion Multi-Language Code Tokens',
+    samplePrompts: [
+      {
+        id: 'qwen32b-p1',
+        title: 'Full Stack Microservices Architecture',
+        prompt: 'Build a production-grade distributed consensus layer with Raft algorithm in Rust.',
+        response: 'Here is the comprehensive implementation with election timers, log replication, and RPC handling...',
+        category: 'Coding'
+      }
+    ]
+  },
+  {
+    id: 'mistral-small-3',
+    name: 'mistral-small:24b',
+    slug: 'mistral-small-3',
+    tagline: 'Mistral Small 3 24B with Apache 2.0 license, 32K context & lightning inference',
+    taglineBn: 'মিস্ট্রাল স্মল ৩ ২৪ বিলিয়ন প্যারামিটারের আল্ট্রা-ফাস্ট ওপেন মডেল',
+    description: 'Mistral Small 3 (24B) is a compact powerhouse built for enterprise workloads, agentic tasks, and low latency on single prosumer GPUs. Fully open under Apache 2.0.',
+    descriptionBn: 'একক জিপিইউতে দ্রুতগতির এজেন্টিক কাজ ও ব্যবসায়িক অটোমেশনের জন্য ২৪ বিলিয়ন মিস্ট্রাল স্মল ৩ মডেল।',
+    creator: 'Mistral AI',
+    avatarIcon: 'Cpu',
+    baseArchitecture: 'Mistral Small 3',
+    parameterSize: '24B',
+    paramNumber: 24.0,
+    category: 'general-chat',
+    modelScope: 'public',
+    contextWindow: '32K',
+    license: 'Apache-2.0',
+    releaseDate: '2026-02-28',
+    downloadsCount: 5100000,
+    likesCount: 165000,
+    rating: 4.95,
+    isFeatured: true,
+    isTrending: true,
+    isNew: true,
+    benchmarks: {
+      mmlu: 88.2,
+      codingHumanEval: 89.6,
+      mathGsm8k: 88.4,
+      banglaNlpScore: 85.0,
+      reasoningArc: 90.2,
+      tokensPerSec: 65
+    },
+    minVramGb: 14.0,
+    recommendedVramGb: 16.0,
+    minCpuRamGb: 24.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '14.5 GB',
+        bytes: 15569256448,
+        filename: 'mistral-small-24b-instruct-2501-q4_k_m.gguf',
+        downloadUrl: 'https://ollama.com/library/mistral-small:24b',
+        recommendedVram: '16 GB VRAM (RTX 4070 Ti / 4080)',
+        recommendedFor: 'Enterprise tool use, JSON schema outputs, and customer-facing chat',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run mistral-small:24b',
+    huggingFaceRepo: 'mistralai/Mistral-Small-24B-Instruct-2501',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(model='mistral-small:24b', messages=[{'role': 'user', 'content': 'Draft a technical SLA specification for a 99.99% cloud storage service'}])\nprint(response['message']['content'])`,
+    tags: ['Public LLM', 'Ollama', 'mistral', '24b', 'apache-2.0', 'tools', 'fast'],
+    features: [
+      'Apache 2.0 open source commercial license',
+      'Fits comfortably on 16GB VRAM GPUs with Q4_K_M',
+      'Exceptional function calling and structured JSON mode'
+    ],
+    featuresBn: ['অ্যাপাচি ২.০ লাইসেন্স', '১৬জিবি জিপিইউতে পারফেক্ট রান', '২৪ বিলিয়ন প্যারামিটার'],
+    trainingTokens: 'Dense Multilingual Instruct Corpus',
+    samplePrompts: [
+      {
+        id: 'mistral-s3-p1',
+        title: 'Generate Structured JSON Schema',
+        prompt: 'Extract purchase order details from this unstructured email and format as strict JSON schema.',
+        response: '{\n  "po_number": "PO-98124",\n  "vendor": "Acme Corp",\n  "total_usd": 14500.00\n}',
+        category: 'Automation'
+      }
+    ]
+  },
+  {
     id: 'llama3-3',
     name: 'llama3.3',
     slug: 'llama3-3',

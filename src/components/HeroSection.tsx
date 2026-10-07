@@ -29,7 +29,6 @@ interface HeroSectionProps {
   categoryCounts: Record<ModelCategory, number>;
   totalDownloads: string;
   onExploreClick: () => void;
-  onOpenOllamaModal?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
@@ -45,8 +44,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   myLlmCount,
   categoryCounts,
   totalDownloads,
-  onExploreClick,
-  onOpenOllamaModal
+  onExploreClick
 }) => {
   const categories: { id: ModelCategory; label: string }[] = [
     { id: 'all', label: 'All Tools & Models' },
@@ -174,21 +172,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {myLlmCount}
               </span>
             </button>
-
-            {/* Ollama Hub Runner Modal Launcher */}
-            {onOpenOllamaModal && (
-              <button
-                id="hero-ollama-modal-btn"
-                onClick={onOpenOllamaModal}
-                className="flex items-center gap-2 rounded-full px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-bold transition-all cursor-pointer bg-gradient-to-r from-sky-600/30 via-blue-600/30 to-amber-500/20 text-sky-200 hover:text-white border border-sky-500/40 hover:border-sky-400 hover:scale-105 shadow-[0_0_20px_rgba(2,132,199,0.25)]"
-              >
-                <span className="text-base leading-none">🦙</span>
-                <span>Ollama LLM Runner</span>
-                <span className="rounded-full bg-sky-950/80 px-2 py-0.5 text-xs text-sky-200 border border-sky-400/30 font-mono">
-                  CLI & New LLM
-                </span>
-              </button>
-            )}
           </div>
         </div>
 

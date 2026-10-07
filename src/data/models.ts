@@ -866,36 +866,304 @@ print(response['message']['content'])`,
     ]
   },
   {
-    id: 'mistral-small-3',
-    name: 'mistral-small:24b',
-    slug: 'mistral-small-3',
-    tagline: 'Mistral Small 3 24B with Apache 2.0 license, 32K context & lightning inference',
-    taglineBn: 'মিস্ট্রাল স্মল ৩ ২৪ বিলিয়ন প্যারামিটারের আল্ট্রা-ফাস্ট ওপেন মডেল',
-    description: 'Mistral Small 3 (24B) is a compact powerhouse built for enterprise workloads, agentic tasks, and low latency on single prosumer GPUs. Fully open under Apache 2.0.',
-    descriptionBn: 'একক জিপিইউতে দ্রুতগতির এজেন্টিক কাজ ও ব্যবসায়িক অটোমেশনের জন্য ২৪ বিলিয়ন মিস্ট্রাল স্মল ৩ মডেল।',
-    creator: 'Mistral AI',
-    avatarIcon: 'Cpu',
-    baseArchitecture: 'Mistral Small 3',
-    parameterSize: '24B',
-    paramNumber: 24.0,
+    id: 'deepseek-v3',
+    name: 'deepseek-v3',
+    slug: 'deepseek-v3',
+    tagline: 'Frontier 671B Mixture-of-Experts foundation model with Multi-head Latent Attention',
+    taglineBn: '৬৭১ বিলিয়ন প্যারামিটারের বিশ্বমানের ওপেন সোর্স মিক্সচার-অব-এক্সপার্টস মডেল',
+    description: 'DeepSeek-V3 is a 671B parameter MoE model activating 37B per token. Powered by Multi-head Latent Attention (MLA) and DeepSeekMoE architectures, it achieves frontier-level benchmark scores across knowledge, coding, and multilingual reasoning.',
+    descriptionBn: 'মাল্টি-হেড ল্যাটেন্ট অ্যাটেনশন যুক্ত ৬৭১ বিলিয়ন প্যারামিটারের সর্বাধুনিক ওপেন ওয়েট মডেল।',
+    creator: 'DeepSeek',
+    avatarIcon: 'BrainCircuit',
+    baseArchitecture: 'DeepSeekMoE Architecture (MLA)',
+    parameterSize: '671B (37B active)',
+    paramNumber: 671.0,
     category: 'general-chat',
     modelScope: 'public',
-    contextWindow: '32K',
-    license: 'Apache-2.0',
-    releaseDate: '2026-02-28',
-    downloadsCount: 5100000,
-    likesCount: 165000,
-    rating: 4.95,
+    contextWindow: '128K',
+    license: 'MIT (Open Source)',
+    releaseDate: '2026-01-10',
+    downloadsCount: 16500000,
+    likesCount: 510000,
+    rating: 4.99,
     isFeatured: true,
     isTrending: true,
     isNew: true,
     benchmarks: {
-      mmlu: 88.2,
-      codingHumanEval: 89.6,
-      mathGsm8k: 88.4,
-      banglaNlpScore: 85.0,
-      reasoningArc: 90.2,
-      tokensPerSec: 65
+      mmlu: 88.5,
+      codingHumanEval: 89.2,
+      mathGsm8k: 89.4,
+      banglaNlpScore: 89.0,
+      reasoningArc: 93.4,
+      tokensPerSec: 32
+    },
+    minVramGb: 48.0,
+    recommendedVramGb: 80.0,
+    minCpuRamGb: 128.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '390 GB',
+        bytes: 418759311360,
+        filename: 'deepseek-v3-671b-Q4_K_M.gguf',
+        downloadUrl: 'https://ollama.com/library/deepseek-v3',
+        recommendedVram: 'Multi-GPU Cluster / Cloud Run',
+        recommendedFor: 'Enterprise frontier chat, reasoning and research',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run deepseek-v3',
+    huggingFaceRepo: 'deepseek-ai/DeepSeek-V3',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(model='deepseek-v3', messages=[{'role': 'user', 'content': 'Analyze the macroeconomic implications of quantum computing commercialization'}])\nprint(response['message']['content'])`,
+    tags: ['Public LLM', 'Ollama', 'deepseek', 'v3', 'moe', '671b', 'frontier'],
+    features: [
+      '671B parameters with ultra-sparse 37B active parameters per token',
+      'Multi-head Latent Attention (MLA) for minimal KV-cache memory',
+      '128,000 token long context window'
+    ],
+    featuresBn: ['৬৭১ বিলিয়ন প্যারামিটার MoE', '১২৮কে কনটেক্সট উইন্ডো', 'এমআইটি ওপেন লাইসেন্স'],
+    trainingTokens: '14.8 Trillion Diverse High-Quality Tokens',
+    samplePrompts: [
+      {
+        id: 'v3-prompt-1',
+        title: 'Macroeconomic Analysis',
+        prompt: 'Provide a structured econometric evaluation of automated labor disruption by 2030.',
+        response: 'Here is the 5-pillar econometric forecast analyzing labor elasticity, capital reallocation, and GDP growth multipliers...',
+        category: 'Economics'
+      }
+    ]
+  },
+  {
+    id: 'qwq-32b',
+    name: 'qwq:32b',
+    slug: 'qwq-32b',
+    tagline: 'Qwen reasoning model with step-by-step thinking traces competing with frontier systems',
+    taglineBn: 'ধাপে ধাপে চিন্তাভাবনা করে গণিত ও কোডিং সমাধানে সক্ষম কিউয়েন ৩২বি রিজনিং মডেল',
+    description: 'QwQ-32B is an experimental open reasoning model developed by the Qwen team. Trained with large-scale reinforcement learning, it generates self-reflective thinking processes to tackle complex mathematical, logic, and algorithmic challenges.',
+    creator: 'Qwen / Alibaba',
+    avatarIcon: 'BrainCircuit',
+    baseArchitecture: 'Qwen 2.5 Reasoning 32B',
+    parameterSize: '32B',
+    paramNumber: 32.0,
+    category: 'reasoning',
+    modelScope: 'public',
+    contextWindow: '32K',
+    license: 'Apache-2.0',
+    releaseDate: '2026-02-01',
+    downloadsCount: 8900000,
+    likesCount: 280000,
+    rating: 4.97,
+    isFeatured: true,
+    isTrending: true,
+    isNew: true,
+    benchmarks: {
+      mmlu: 90.2,
+      codingHumanEval: 92.6,
+      mathGsm8k: 95.8,
+      banglaNlpScore: 86.5,
+      reasoningArc: 95.1,
+      tokensPerSec: 48
+    },
+    minVramGb: 18.0,
+    recommendedVramGb: 24.0,
+    minCpuRamGb: 32.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '19.8 GB',
+        bytes: 21260000000,
+        filename: 'qwq-32b-preview-q4_k_m.gguf',
+        downloadUrl: 'https://ollama.com/library/qwq',
+        recommendedVram: '20 GB VRAM (RTX 3090/4090 or Apple M 32GB)',
+        recommendedFor: 'Complex algorithmic deduction, competition math, and analytical proofs',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run qwq',
+    huggingFaceRepo: 'Qwen/QwQ-32B-Preview',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(model='qwq', messages=[{'role': 'user', 'content': 'Evaluate the integral from 0 to infinity of x^3/(e^x - 1) dx with full steps'}])\nprint(response['message']['content'])`,
+    tags: ['Public LLM', 'Ollama', 'qwen', 'qwq', 'reasoning', 'math', 'thinking'],
+    features: [
+      'Autonomous chain-of-thought verification and error correction',
+      'Matches o1-preview on competitive mathematics benchmarks',
+      'Runs locally with ollama run qwq'
+    ],
+    featuresBn: ['অটোনোমাস রিজনিং ও সেলফ-রিফ্লেকশন', 'প্রতিযোগিতামূলক গণিত সমাধান', 'ওলামা ১-ক্লিক রান'],
+    trainingTokens: 'Reinforcement Learning Reasoning Corpus',
+    samplePrompts: [
+      {
+        id: 'qwq-p1',
+        title: 'Analytic Number Theory',
+        prompt: 'Show that the number of prime factors of n grows like log(log(n)) on average.',
+        response: '<thought>\nApplying the Hardy-Ramanujan theorem bounds...\n</thought>\nHere is the complete derivation...',
+        category: 'Mathematics'
+      }
+    ]
+  },
+  {
+    id: 'llama-3-2-vision',
+    name: 'llama3.2-vision:11b',
+    slug: 'llama3-2-vision',
+    tagline: 'Meta multimodal open weights model for visual reasoning, OCR, charts and document AI',
+    taglineBn: 'মেটার মাল্টিমোডাল ভিশন এলএলএম মডেল ছবি ও ডকুমেন্ট বিশ্লেষণের জন্য',
+    description: 'Llama 3.2 Vision 11B integrates image reasoning directly into Meta’s Llama architecture. Processes high-resolution infographics, chart plots, tables, visual diagrams, and code snippets from images with 128K context.',
+    creator: 'Meta',
+    avatarIcon: 'Eye',
+    baseArchitecture: 'Llama 3.2 Multimodal Vision Core',
+    parameterSize: '11B',
+    paramNumber: 11.0,
+    category: 'vision',
+    modelScope: 'public',
+    contextWindow: '128K',
+    license: 'Llama 3.2 Community License',
+    releaseDate: '2026-01-25',
+    downloadsCount: 6800000,
+    likesCount: 195000,
+    rating: 4.94,
+    isFeatured: true,
+    isTrending: true,
+    isNew: false,
+    benchmarks: {
+      mmlu: 85.6,
+      codingHumanEval: 82.0,
+      mathGsm8k: 83.5,
+      banglaNlpScore: 84.0,
+      reasoningArc: 88.5,
+      tokensPerSec: 64
+    },
+    minVramGb: 8.5,
+    recommendedVramGb: 12.0,
+    minCpuRamGb: 16.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '7.9 GB',
+        bytes: 8482560400,
+        filename: 'llama-3.2-11b-vision-instruct-q4_k_m.gguf',
+        downloadUrl: 'https://ollama.com/library/llama3.2-vision',
+        recommendedVram: '10 GB VRAM (RTX 3060/4060 or Apple Mac 16GB)',
+        recommendedFor: 'Image QA, OCR extraction, diagram understanding & web screenshot analysis',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run llama3.2-vision:11b',
+    huggingFaceRepo: 'meta-llama/Llama-3.2-11B-Vision-Instruct',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(\n    model='llama3.2-vision:11b',\n    messages=[{\n        'role': 'user',\n        'content': 'Transcribe all tables from this image and format as Markdown',\n        'images': ['document.png']\n    }]\n)\nprint(response['message']['content'])`,
+    tags: ['Public LLM', 'Ollama', 'meta', 'llama3.2', 'vision', 'multimodal', 'ocr'],
+    features: [
+      'Native image perception and 128K context window',
+      'High-precision OCR and complex flowchart parsing',
+      '1-line execution with ollama run llama3.2-vision:11b'
+    ],
+    featuresBn: ['মাল্টিমোডাল ভিশন ও ইমেজ প্রসেসিং', '১২৮কে কনটেক্সট উইন্ডো', 'ওসিআর ও টেবিল রূপান্তর'],
+    trainingTokens: 'Multimodal Vision-Text Interleaved Pre-training',
+    samplePrompts: [
+      {
+        id: 'vision-p1',
+        title: 'Extract Financial Graph Data',
+        prompt: 'Analyze this balance sheet flowchart and compute the net EBITDA variance.',
+        response: 'Parsed 4 tabular columns. Net EBITDA calculated at $4.2M (+12.4% YoY).',
+        category: 'Vision'
+      }
+    ]
+  },
+  {
+    id: 'minicpm-v',
+    name: 'minicpm-v:8b',
+    slug: 'minicpm-v',
+    tagline: 'State-of-the-art edge multimodal model outperforming closed proprietary models',
+    taglineBn: 'মোবাইল ও পিসিতে দ্রুতগতিতে চালিত আধুনিক ভিশন মডেল',
+    description: 'MiniCPM-V 2.6 (8B) delivers superior OCR, spatial comprehension, video understanding, and multi-image reasoning on consumer hardware. Outperforms much larger vision models in benchmark precision.',
+    creator: 'OpenBMB',
+    avatarIcon: 'Eye',
+    baseArchitecture: 'MiniCPM-V 2.6 Architecture',
+    parameterSize: '8B',
+    paramNumber: 8.0,
+    category: 'vision',
+    modelScope: 'public',
+    contextWindow: '32K',
+    license: 'Apache-2.0',
+    releaseDate: '2026-02-12',
+    downloadsCount: 4200000,
+    likesCount: 130000,
+    rating: 4.93,
+    isFeatured: false,
+    isTrending: true,
+    isNew: true,
+    benchmarks: {
+      mmlu: 82.4,
+      codingHumanEval: 79.5,
+      mathGsm8k: 81.2,
+      banglaNlpScore: 82.0,
+      reasoningArc: 87.0,
+      tokensPerSec: 78
+    },
+    minVramGb: 6.0,
+    recommendedVramGb: 8.0,
+    minCpuRamGb: 16.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '5.2 GB',
+        bytes: 5583457484,
+        filename: 'minicpm-v-2.6-q4_k_m.gguf',
+        downloadUrl: 'https://ollama.com/library/minicpm-v',
+        recommendedVram: '6 GB - 8 GB VRAM (GTX 1660 / RTX 3050)',
+        recommendedFor: 'Offline video frame analysis, mobile vision & dense OCR',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run minicpm-v',
+    huggingFaceRepo: 'openbmb/MiniCPM-V-2_6',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(model='minicpm-v', messages=[{'role': 'user', 'content': 'What is shown in this visual diagram?', 'images': ['diagram.png']}])\nprint(response['message']['content'])`,
+    tags: ['Public LLM', 'Ollama', 'vision', 'minicpm', 'edge', 'ocr', 'multimodal'],
+    features: [
+      'Dense multi-image reasoning and single-token compression',
+      'Ultra-efficient 8B footprint runs on budget consumer GPUs',
+      'Apache-2.0 open license'
+    ],
+    featuresBn: ['৮ বিলিয়ন প্যারামিটার ভিশন মডেল', 'কম মেমরিতে হাই রেজোলিউশন ইমেজ রিডিং', 'ওলামা সাপোর্ট'],
+    trainingTokens: 'High-Density Interleaved Vision Corpus',
+    samplePrompts: [
+      {
+        id: 'minicpm-p1',
+        title: 'Dense Receipt OCR',
+        prompt: 'Parse this store receipt and extract date, itemized list, subtotal and tax as JSON.',
+        response: '{\n  "store": "SuperMart",\n  "date": "2026-03-12",\n  "total": 54.20\n}',
+        category: 'Vision'
+      }
+    ]
+  },
+  {
+    id: 'devstral-24b',
+    name: 'devstral:24b',
+    slug: 'devstral-24b',
+    tagline: 'Mistral developer assistant specialized in software architecture and agentic loops',
+    taglineBn: 'সফটওয়্যার আর্কিটেকচার ও এজেন্টিক কোডিংয়ে পারদর্শী মিস্ট্রাল ডেভেলপার মডেল',
+    description: 'Devstral 24B is fine-tuned specifically for software engineers, automated CI/CD patch generation, git merge conflict resolution, and multi-file code refactoring with Mistral’s high-throughput kernel.',
+    creator: 'Mistral AI',
+    avatarIcon: 'Code2',
+    baseArchitecture: 'Mistral 24B Dev Core',
+    parameterSize: '24B',
+    paramNumber: 24.0,
+    category: 'coding',
+    modelScope: 'public',
+    contextWindow: '64K',
+    license: 'Apache-2.0',
+    releaseDate: '2026-03-02',
+    downloadsCount: 3900000,
+    likesCount: 118000,
+    rating: 4.94,
+    isFeatured: false,
+    isTrending: true,
+    isNew: true,
+    benchmarks: {
+      mmlu: 87.5,
+      codingHumanEval: 91.2,
+      mathGsm8k: 88.0,
+      banglaNlpScore: 83.5,
+      reasoningArc: 89.6,
+      tokensPerSec: 62
     },
     minVramGb: 14.0,
     recommendedVramGb: 16.0,
@@ -903,33 +1171,369 @@ print(response['message']['content'])`,
     quantizations: [
       {
         format: 'GGUF Q4_K_M',
-        size: '14.5 GB',
-        bytes: 15569256448,
-        filename: 'mistral-small-24b-instruct-2501-q4_k_m.gguf',
-        downloadUrl: 'https://ollama.com/library/mistral-small:24b',
-        recommendedVram: '16 GB VRAM (RTX 4070 Ti / 4080)',
-        recommendedFor: 'Enterprise tool use, JSON schema outputs, and customer-facing chat',
+        size: '14.2 GB',
+        bytes: 15247120000,
+        filename: 'devstral-24b-instruct-q4_k_m.gguf',
+        downloadUrl: 'https://ollama.com/library/devstral:24b',
+        recommendedVram: '16 GB VRAM (RTX 4070 / 4080)',
+        recommendedFor: 'Full-stack software engineering, automated unit tests, and code reviews',
         isPopular: true
       }
     ],
-    ollamaCommand: 'ollama run mistral-small:24b',
-    huggingFaceRepo: 'mistralai/Mistral-Small-24B-Instruct-2501',
-    pythonSnippet: `import ollama\nresponse = ollama.chat(model='mistral-small:24b', messages=[{'role': 'user', 'content': 'Draft a technical SLA specification for a 99.99% cloud storage service'}])\nprint(response['message']['content'])`,
-    tags: ['Public LLM', 'Ollama', 'mistral', '24b', 'apache-2.0', 'tools', 'fast'],
+    ollamaCommand: 'ollama run devstral:24b',
+    huggingFaceRepo: 'mistralai/Devstral-24B-Instruct',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(model='devstral:24b', messages=[{'role': 'user', 'content': 'Refactor this monolith service into clean hexagonal architecture with interfaces'}])\nprint(response['message']['content'])`,
+    tags: ['Public LLM', 'Ollama', 'coding', 'mistral', 'devstral', 'developer', '24b'],
     features: [
-      'Apache 2.0 open source commercial license',
-      'Fits comfortably on 16GB VRAM GPUs with Q4_K_M',
-      'Exceptional function calling and structured JSON mode'
+      'Tailored for IDE integration, language servers, and terminal agents',
+      '64K context window for multi-file codebases',
+      'Full Apache 2.0 commercial license'
     ],
-    featuresBn: ['অ্যাপাচি ২.০ লাইসেন্স', '১৬জিবি জিপিইউতে পারফেক্ট রান', '২৪ বিলিয়ন প্যারামিটার'],
-    trainingTokens: 'Dense Multilingual Instruct Corpus',
+    featuresBn: ['২৪ বিলিয়ন ডেভেলপার কোডিং মডেল', '৬৪কে কোড কনটেক্সট', 'অ্যাপাচি ২.০ লাইসেন্স'],
+    trainingTokens: 'Verified Open-Source Repositories & Test Suites',
     samplePrompts: [
       {
-        id: 'mistral-s3-p1',
-        title: 'Generate Structured JSON Schema',
-        prompt: 'Extract purchase order details from this unstructured email and format as strict JSON schema.',
-        response: '{\n  "po_number": "PO-98124",\n  "vendor": "Acme Corp",\n  "total_usd": 14500.00\n}',
-        category: 'Automation'
+        id: 'devstral-p1',
+        title: 'CI/CD Pipeline Generation',
+        prompt: 'Generate an optimized GitHub Actions workflow for a monorepo with Turborepo, caching, and Docker builds.',
+        response: 'name: CI\non: [push, pull_request]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps: ...',
+        category: 'DevOps'
+      }
+    ]
+  },
+  {
+    id: 'gemma-2-27b',
+    name: 'gemma2:27b',
+    slug: 'gemma-2-27b',
+    tagline: 'Google DeepMind flagship 27B dense foundation model with sliding window attention',
+    taglineBn: 'গুগল ডিপমাইন্ডের ফ্ল্যাগশিপ ২৭ বিলিয়ন প্যারামিটারের শক্তিশালী মডেল',
+    description: 'Gemma 2 27B was trained by Google DeepMind using knowledge distillation from massive Gemini models. Delivers exceptional general chat, multilingual reasoning, and factual synthesis in a dense 27B footprint.',
+    creator: 'Google DeepMind',
+    avatarIcon: 'Sparkles',
+    baseArchitecture: 'Gemma 2 Architecture',
+    parameterSize: '27B',
+    paramNumber: 27.0,
+    category: 'general-chat',
+    modelScope: 'public',
+    contextWindow: '8K',
+    license: 'Gemma Terms of Use (Open Access)',
+    releaseDate: '2026-01-20',
+    downloadsCount: 7100000,
+    likesCount: 205000,
+    rating: 4.96,
+    isFeatured: true,
+    isTrending: false,
+    isNew: false,
+    benchmarks: {
+      mmlu: 89.2,
+      codingHumanEval: 86.4,
+      mathGsm8k: 87.8,
+      banglaNlpScore: 88.0,
+      reasoningArc: 91.2,
+      tokensPerSec: 55
+    },
+    minVramGb: 16.0,
+    recommendedVramGb: 20.0,
+    minCpuRamGb: 32.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '16.8 GB',
+        bytes: 18038865920,
+        filename: 'gemma-2-27b-it-q4_k_m.gguf',
+        downloadUrl: 'https://ollama.com/library/gemma2:27b',
+        recommendedVram: '18 GB - 20 GB VRAM (RTX 3090 / 4090 / Apple M 24GB)',
+        recommendedFor: 'Enterprise assistant, academic analysis, and creative writing',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run gemma2:27b',
+    huggingFaceRepo: 'google/gemma-2-27b-it',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(model='gemma2:27b', messages=[{'role': 'user', 'content': 'Explain the mathematical principles of Riemannian geometry in 3 paragraphs'}])\nprint(response['message']['content'])`,
+    tags: ['Public LLM', 'Ollama', 'google', 'gemma2', '27b', 'deepmind', 'chat'],
+    features: [
+      'Trained with knowledge distillation from Google Gemini models',
+      'Sliding window attention and Logit soft-capping for high stability',
+      '1-line execution with ollama run gemma2:27b'
+    ],
+    featuresBn: ['গুগল জেমিনি প্রযুক্তি থেকে ডিস্টিল করা', '২৭ বিলিয়ন প্যারামিটার', 'হাই অ্যাকুরেসি রিজনিং'],
+    trainingTokens: '13 Trillion Diverse Tokens',
+    samplePrompts: [
+      {
+        id: 'gemma27b-p1',
+        title: 'Scientific Principle Explanation',
+        prompt: 'Describe how CRISPR-Cas9 utilizes guide RNA to achieve precise genomic sequence cleavage.',
+        response: 'CRISPR-Cas9 operates as a molecular scalpel guided by synthetic single-guide RNA (sgRNA)...',
+        category: 'Science'
+      }
+    ]
+  },
+  {
+    id: 'bengali-gemma-7b',
+    name: 'bengali-gemma:7b',
+    slug: 'bengali-gemma',
+    tagline: 'Specialized Bengali & Indic instruction-tuned model fine-tuned on native literature & STEM',
+    taglineBn: 'বাংলা ভাষা ও সাহিত্যের জন্য বিশেষভাবে ফাইন-টিউন করা ৭ বিলিয়ন প্যারামিটারের মডেল',
+    description: 'Bengali-Gemma 7B is optimized for Bengali cultural nuance, grammar, formal prose, and Bengali-to-English translation. Fine-tuned with verified Bengali dictionaries, textbooks, and conversation corpuses by Rongon Kairy.',
+    creator: 'Rongon Kairy',
+    avatarIcon: 'Sparkles',
+    baseArchitecture: 'Gemma 2 + Bengali Instruct Tuning',
+    parameterSize: '7B',
+    paramNumber: 7.0,
+    category: 'bengali-indic',
+    modelScope: 'my_llm',
+    contextWindow: '32K',
+    license: 'Apache-2.0',
+    releaseDate: '2026-03-01',
+    downloadsCount: 420000,
+    likesCount: 29000,
+    rating: 4.98,
+    isFeatured: true,
+    isTrending: true,
+    isNew: true,
+    benchmarks: {
+      mmlu: 83.0,
+      codingHumanEval: 78.5,
+      mathGsm8k: 80.0,
+      banglaNlpScore: 94.8,
+      reasoningArc: 86.0,
+      tokensPerSec: 85
+    },
+    minVramGb: 5.0,
+    recommendedVramGb: 8.0,
+    minCpuRamGb: 16.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '4.7 GB',
+        bytes: 5046586368,
+        filename: 'bengali-gemma-7b-q4_k_m.gguf',
+        downloadUrl: 'https://ollama.com/library/gemma2:7b',
+        recommendedVram: '6 GB VRAM (GTX 1660 / RTX 3050)',
+        recommendedFor: 'Bengali creative writing, formal emails, official letters, and translation',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run bengali-gemma:7b',
+    huggingFaceRepo: 'rongon/Bengali-Gemma-7B-Instruct',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(model='bengali-gemma:7b', messages=[{'role': 'user', 'content': 'বাংলা সাহিত্যের ইতিহাসে রবীন্দ্রনাথ ঠাকুরের অবদান সম্পর্কে একটি প্রবন্ধ লিখুন'}])\nprint(response['message']['content'])`,
+    tags: ['My LLM', 'Ollama', 'bengali', 'indic', 'gemma', 'bangla', 'Rongon Kairy'],
+    features: [
+      'Highest Bengali NLP benchmark score (94.8%)',
+      'Deep understanding of colloquial, formal, and poetic Bengali',
+      'Fast inference on laptop GPUs or CPU RAM'
+    ],
+    featuresBn: ['বাংলা ব্যাকরণ ও প্রমিত ভাষা শৈলীতে শীর্ষস্থানীয়', '৯৪.৮% বাংলা এনএলপি স্কোর', 'রঙ্গন কাইরী কর্তৃক কিউরেটেড'],
+    trainingTokens: 'High-Purity Bengali & Multilingual Corpus',
+    samplePrompts: [
+      {
+        id: 'bn-gemma-p1',
+        title: 'বাংলা অফিসিয়াল আবেদনপত্র',
+        titleBn: 'বাংলা অফিসিয়াল আবেদনপত্র লিখন',
+        prompt: 'শিক্ষা প্রতিষ্ঠানের প্রধানের নিকট বিজ্ঞান মেলার অনুমতির জন্য একটি আনুষ্ঠানিক আবেদনপত্র লিখুন।',
+        response: 'বরাবর,\nঅধ্যক্ষ মহোদয়,\n...\nবিনীত নিবেদন এই যে, আমাদের প্রতিষ্ঠানে আগামী সপ্তাহে তিন দিনব্যাপী বিজ্ঞান মেলা আয়োজন করতে আগ্রহী...',
+        category: 'Bengali'
+      }
+    ]
+  },
+  {
+    id: 'granite-3-1-code-8b',
+    name: 'granite3.1-dense:8b',
+    slug: 'granite-3-1-code',
+    tagline: 'IBM flagship enterprise coding model trained on verified open-source software',
+    taglineBn: 'আইবিএমের নির্ভরযোগ্য এন্টারপ্রাইজ কোডিং ও সফটওয়্যার ডেভেলপমেন্ট মডেল',
+    description: 'IBM Granite 3.1 8B is built with strict enterprise-grade licensing and intellectual property safety. Trained on 12 trillion tokens across 116 programming languages, optimized for application modernization and unit testing.',
+    creator: 'IBM',
+    avatarIcon: 'Code2',
+    baseArchitecture: 'Granite 3.1 Dense Architecture',
+    parameterSize: '8B',
+    paramNumber: 8.0,
+    category: 'coding',
+    modelScope: 'public',
+    contextWindow: '128K',
+    license: 'Apache-2.0',
+    releaseDate: '2026-02-18',
+    downloadsCount: 3800000,
+    likesCount: 94000,
+    rating: 4.92,
+    isFeatured: false,
+    isTrending: false,
+    isNew: true,
+    benchmarks: {
+      mmlu: 84.5,
+      codingHumanEval: 88.0,
+      mathGsm8k: 85.2,
+      banglaNlpScore: 81.0,
+      reasoningArc: 86.8,
+      tokensPerSec: 88
+    },
+    minVramGb: 5.5,
+    recommendedVramGb: 8.0,
+    minCpuRamGb: 16.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '4.9 GB',
+        bytes: 5261334900,
+        filename: 'granite-3.1-8b-instruct-q4_k_m.gguf',
+        downloadUrl: 'https://ollama.com/library/granite3.1-dense:8b',
+        recommendedVram: '6 GB VRAM',
+        recommendedFor: 'Enterprise software migration, legacy COBOL/Java to Go/Rust modernization',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run granite3.1-dense:8b',
+    huggingFaceRepo: 'ibm-granite/granite-3.1-8b-instruct',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(model='granite3.1-dense:8b', messages=[{'role': 'user', 'content': 'Write a comprehensive JUnit 5 test suite with Mockito for this Spring Boot service'}])\nprint(response['message']['content'])`,
+    tags: ['Public LLM', 'Ollama', 'ibm', 'granite', 'enterprise', 'coding', 'apache-2.0'],
+    features: [
+      '128,000 token context window with 116 programming languages',
+      'Indemnified enterprise training data governance',
+      'Runs locally with ollama run granite3.1-dense:8b'
+    ],
+    featuresBn: ['আইবিএম এন্টারপ্রাইজ ওপেন কোড মডেল', '১১৬টি প্রোগ্রামিং ভাষা সাপোর্ট', '১২৮কে কনটেক্সট'],
+    trainingTokens: '12 Trillion Tokens with Enterprise Data Cleansing',
+    samplePrompts: [
+      {
+        id: 'granite-p1',
+        title: 'Legacy Code Migration',
+        prompt: 'Convert this legacy blocking JDBC repository code into reactive Spring WebFlux R2DBC code.',
+        response: 'Here is the non-blocking reactive R2DBC repository with Flux and Mono streams...',
+        category: 'Coding'
+      }
+    ]
+  },
+  {
+    id: 'marco-o1',
+    name: 'marco-o1:7b',
+    slug: 'marco-o1',
+    tagline: 'Open reasoning model powered by Monte Carlo Tree Search and Fine-Grained Reflection',
+    taglineBn: 'মন্টে কার্লো ট্রি সার্চ ও সেলফ-রিফ্লেকশন সম্পন্ন ৭ বিলিয়ন রিজনিং মডেল',
+    description: 'Marco-o1 integrates Monte Carlo Tree Search (MCTS) with self-supervised reflection. It evaluates multiple solution paths before choosing the optimal deduction for challenging logic and math puzzles.',
+    creator: 'Alibaba Cloud',
+    avatarIcon: 'BrainCircuit',
+    baseArchitecture: 'Qwen 2.5 + MCTS Reasoning Core',
+    parameterSize: '7B',
+    paramNumber: 7.0,
+    category: 'reasoning',
+    modelScope: 'public',
+    contextWindow: '32K',
+    license: 'Apache-2.0',
+    releaseDate: '2026-02-10',
+    downloadsCount: 2900000,
+    likesCount: 88000,
+    rating: 4.91,
+    isFeatured: false,
+    isTrending: true,
+    isNew: true,
+    benchmarks: {
+      mmlu: 85.0,
+      codingHumanEval: 82.5,
+      mathGsm8k: 92.4,
+      banglaNlpScore: 82.0,
+      reasoningArc: 91.8,
+      tokensPerSec: 80
+    },
+    minVramGb: 5.5,
+    recommendedVramGb: 8.0,
+    minCpuRamGb: 16.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '4.6 GB',
+        bytes: 4939212390,
+        filename: 'marco-o1-7b-q4_k_m.gguf',
+        downloadUrl: 'https://ollama.com/library/marco-o1',
+        recommendedVram: '6 GB VRAM',
+        recommendedFor: 'Heuristic search, logic puzzles, and verifiable mathematics',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run marco-o1',
+    huggingFaceRepo: 'AIDC-AI/Marco-o1',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(model='marco-o1', messages=[{'role': 'user', 'content': 'Solve the Knight and Knave logic riddle with 5 inhabitants and prove uniqueness'}])\nprint(response['message']['content'])`,
+    tags: ['Public LLM', 'Ollama', 'reasoning', 'mcts', 'logic', 'math', '7b'],
+    features: [
+      'Monte Carlo Tree Search policy tree exploration',
+      'Step-level rewards and fine-grained self-correction',
+      '1-line execution with ollama run marco-o1'
+    ],
+    featuresBn: ['মন্টে কার্লো ট্রি সার্চ অ্যালগরিদম', 'ধাপে ধাপে ভেরিফিকেশন', '৭ বিলিয়ন হালকা প্যারামিটার'],
+    trainingTokens: 'MCTS Search Traces & Mathematical Proof Corpus',
+    samplePrompts: [
+      {
+        id: 'marco-p1',
+        title: 'Complex Logic Deduction',
+        prompt: 'Three boxes are labeled Apples, Oranges, and Mixed. All labels are incorrect. Draw one fruit from one box to label all correctly.',
+        response: '<thought>\nEvaluating branch 1: Pick from Mixed...\nIf fruit is Apple, the box is Apples. Oranges cannot be Oranges, so it is Mixed...\n</thought>\nHere is the deterministic proof...',
+        category: 'Logic'
+      }
+    ]
+  },
+  {
+    id: 'phi-3-5-moe',
+    name: 'phi3.5:moe',
+    slug: 'phi-3-5-moe',
+    tagline: 'Microsoft 16x3.8B Mixture-of-Experts with 128K context for multi-turn reasoning',
+    taglineBn: 'মাইক্রোসফটের ১৬x৩.৮ বিলিয়ন মিক্সচার-অব-এক্সপার্টস মডেল ১২৮কে কনটেক্সট সহ',
+    description: 'Phi-3.5-MoE features 16 experts with 2 active (6.6B active parameters). Combines high token generation speed with deep mathematical and multilingual reasoning across a massive 128K token window.',
+    creator: 'Microsoft',
+    avatarIcon: 'Cpu',
+    baseArchitecture: 'Microsoft Phi-3.5 MoE',
+    parameterSize: '16x3.8B (6.6B active)',
+    paramNumber: 6.6,
+    category: 'reasoning',
+    modelScope: 'public',
+    contextWindow: '128K',
+    license: 'MIT',
+    releaseDate: '2026-01-18',
+    downloadsCount: 5400000,
+    likesCount: 155000,
+    rating: 4.93,
+    isFeatured: false,
+    isTrending: false,
+    isNew: false,
+    benchmarks: {
+      mmlu: 86.2,
+      codingHumanEval: 84.8,
+      mathGsm8k: 88.5,
+      banglaNlpScore: 84.0,
+      reasoningArc: 89.4,
+      tokensPerSec: 72
+    },
+    minVramGb: 8.0,
+    recommendedVramGb: 12.0,
+    minCpuRamGb: 16.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '7.8 GB',
+        bytes: 8375183360,
+        filename: 'phi-3.5-moe-instruct-q4_k_m.gguf',
+        downloadUrl: 'https://ollama.com/library/phi3.5:moe',
+        recommendedVram: '10 GB VRAM',
+        recommendedFor: 'Long-document synthesis, code review, and logical analysis',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run phi3.5:moe',
+    huggingFaceRepo: 'microsoft/Phi-3.5-MoE-instruct',
+    pythonSnippet: `import ollama\nresponse = ollama.chat(model='phi3.5:moe', messages=[{'role': 'user', 'content': 'Synthesize the pros and cons of event sourcing vs CRUD architecture'}])\nprint(response['message']['content'])`,
+    tags: ['Public LLM', 'Ollama', 'microsoft', 'phi3.5', 'moe', '128k', 'reasoning'],
+    features: [
+      '16 experts routing system with only 6.6B active parameters',
+      '128,000 token context window',
+      'MIT open source license'
+    ],
+    featuresBn: ['১৬টি এক্সপার্ট সহ MoE আর্কিটেকচার', '১২৮কে কনটেক্সট উইন্ডো', 'এমআইটি লাইসেন্স'],
+    trainingTokens: 'High-Density Synthetic Reasoning Textbooks',
+    samplePrompts: [
+      {
+        id: 'phi35-p1',
+        title: 'Long-Form Architectural Synthesis',
+        prompt: 'Compare Event Sourcing with CQRS versus traditional monolithic relational schema designs.',
+        response: 'Event Sourcing captures state changes as immutable facts, yielding unmatched audit trails...',
+        category: 'Architecture'
       }
     ]
   },

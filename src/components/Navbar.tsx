@@ -18,7 +18,6 @@ interface NavbarProps {
   onScrollToModels: () => void;
   myLlmCount?: number;
   onOpenSocialModal: () => void;
-  onOpenOllamaModal?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -31,8 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   totalDownloads,
   onScrollToModels,
   myLlmCount,
-  onOpenSocialModal,
-  onOpenOllamaModal
+  onOpenSocialModal
 }) => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/5 bg-black/70 backdrop-blur-xl transition-all">
@@ -146,23 +144,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </button>
           </div>
-
-          {/* Ollama Hub / Runner Modal Button */}
-          {onOpenOllamaModal && (
-            <button
-              id="nav-ollama-hub-btn"
-              onClick={onOpenOllamaModal}
-              className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-sky-600/20 via-blue-600/20 to-amber-500/10 border border-sky-500/40 hover:border-sky-400 text-sky-200 hover:text-white px-3 py-1.5 text-xs font-bold transition-all cursor-pointer shadow-[0_0_12px_rgba(2,132,199,0.2)] hover:scale-[1.02]"
-              title="Open Ollama LLM Runner & Custom Model Builder"
-            >
-              <span className="text-sm leading-none">🦙</span>
-              <span className="hidden sm:inline">Ollama Hub</span>
-              <span className="inline sm:hidden">Ollama</span>
-              <span className="rounded-full bg-sky-500/30 text-sky-300 text-[9px] px-1.5 py-0.2 font-mono uppercase">
-                CLI
-              </span>
-            </button>
-          )}
 
           {/* Creator Profile Button */}
           <button

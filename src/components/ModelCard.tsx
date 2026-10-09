@@ -20,7 +20,8 @@ import {
   Zap,
   Gauge,
   FolderGit2,
-  Globe2
+  Globe2,
+  GitCompare
 } from 'lucide-react';
 import { LLMModel, QuantizationOption } from '../types';
 import { OrganizationLogo } from './OrganizationLogo';
@@ -29,12 +30,16 @@ interface ModelCardProps {
   model: LLMModel;
   onDownload: (model: LLMModel, quant: QuantizationOption) => void;
   onOpenSocialModal?: () => void;
+  isCompared?: boolean;
+  onToggleCompare?: (model: LLMModel) => void;
 }
 
 export const ModelCard: React.FC<ModelCardProps> = ({
   model,
   onDownload,
-  onOpenSocialModal
+  onOpenSocialModal,
+  isCompared = false,
+  onToggleCompare
 }) => {
   const [copiedOllama, setCopiedOllama] = useState(false);
   const [copiedHfLink, setCopiedHfLink] = useState(false);
@@ -67,7 +72,11 @@ export const ModelCard: React.FC<ModelCardProps> = ({
   return (
     <div 
       id={`model-card-${model.id}`}
-      className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-zinc-900/50 p-5 backdrop-blur-md transition-all hover:border-blue-500/40 hover:bg-zinc-900/80 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]"
+      className={`group relative flex flex-col justify-between rounded-2xl border p-5 backdrop-blur-md transition-all ${
+        isCompared
+          ? 'border-cyan-400/80 bg-zinc-900/90 shadow-[0_0_30px_rgba(6,182,212,0.22)] ring-1 ring-cyan-400/50'
+          : 'border-white/10 bg-zinc-900/50 hover:border-blue-500/40 hover:bg-zinc-900/80 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]'
+      }`}
     >
       <div>
         {/* Top Header Row: Organization Logo, Name, Parameters, Badges */}
@@ -76,7 +85,9 @@ export const ModelCard: React.FC<ModelCardProps> = ({
             <OrganizationLogo creator={model.creator} size="md" />
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-bold text-white text-base group-hover:text-blue-400 transition-colors">
+                <span className={`font-bold text-base transition-colors ${
+                  isCompared ? 'text-cyan-300' : 'text-white group-hover:text-blue-400'
+                }`}>
                   {model.name}
                 </span>
               </div>
@@ -102,6 +113,26 @@ export const ModelCard: React.FC<ModelCardProps> = ({
           </div>
 
           <div className="flex items-center gap-1.5 flex-wrap justify-end">
+            {/* Compare Quick Toggle */}
+            <button
+              type="button"
+              id={`quick-compare-${model.id}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleCompare?.(model);
+              }}
+              className={`inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-[11px] font-bold transition-all cursor-pointer border ${
+                isCompared
+                  ? 'bg-cyan-500 text-black border-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.4)]'
+                  : 'bg-zinc-800/80 text-zinc-300 hover:text-cyan-300 border-white/10 hover:border-cyan-500/40 hover:bg-zinc-800'
+              }`}
+              title={isCompared ? 'Remove model from comparison' : 'Add model to side-by-side comparison (max 2)'}
+            >
+              <GitCompare className="h-3 w-3" />
+              <span>{isCompared ? 'Compared' : 'Compare'}</span>
+              {isCompared && <Check className="h-3 w-3 text-black stroke-[3]" />}
+            </button>
+
             {isHfModel ? (
               <span className="rounded-lg bg-amber-500/10 px-2 py-0.5 text-[11px] font-bold text-amber-300 border border-amber-500/30">
                 🤗 Hugging Face
@@ -432,19 +463,37 @@ export const ModelCard: React.FC<ModelCardProps> = ({
         )}
       </div>
 
-      {/* Action Footer: Specs toggle, Source Link, and Clean Size Badge */}
+      {/* Action Footer: Specs toggle, Compare button, Source Link, and Clean Size Badge */}
       <div className="mt-5 pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-2">
         
-        {/* Toggle Inline Specs */}
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          id={`btn-details-${model.id}`}
-          className="flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold text-zinc-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer border border-white/5 bg-zinc-800/40"
-        >
-          <Info className="h-3.5 w-3.5 text-blue-400" />
-          <span>{isExpanded ? 'Hide Specs' : 'Specs'}</span>
-          {isExpanded ? <ChevronUp className="h-3 w-3 text-zinc-400" /> : <ChevronDown className="h-3 w-3 text-zinc-400" />}
-        </button>
+        <div className="flex items-center gap-1.5 flex-wrap">
+          {/* Toggle Inline Specs */}
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            id={`btn-details-${model.id}`}
+            className="flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold text-zinc-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer border border-white/5 bg-zinc-800/40"
+          >
+            <Info className="h-3.5 w-3.5 text-blue-400" />
+            <span>{isExpanded ? 'Hide Specs' : 'Specs'}</span>
+            {isExpanded ? <ChevronUp className="h-3 w-3 text-zinc-400" /> : <ChevronDown className="h-3 w-3 text-zinc-400" />}
+          </button>
+
+          {/* Side-by-Side Compare Button */}
+          <button
+            onClick={() => onToggleCompare?.(model)}
+            id={`btn-compare-${model.id}`}
+            className={`flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold transition-all cursor-pointer border ${
+              isCompared
+                ? 'bg-cyan-500/20 text-cyan-200 border-cyan-400/70 shadow-[0_0_15px_rgba(6,182,212,0.3)] ring-1 ring-cyan-400/40 font-bold'
+                : 'text-zinc-300 hover:text-white hover:bg-white/10 border-white/10 bg-zinc-800/40 hover:border-cyan-500/40'
+            }`}
+            title={isCompared ? 'Remove model from comparison' : 'Select model to compare technical specifications side-by-side'}
+          >
+            <GitCompare className={`h-3.5 w-3.5 ${isCompared ? 'text-cyan-300' : 'text-zinc-400'}`} />
+            <span>{isCompared ? 'Comparing' : 'Compare'}</span>
+            {isCompared && <Check className="h-3 w-3 text-cyan-300 stroke-[2.5]" />}
+          </button>
+        </div>
 
         {/* Source Link (Web Tool vs Hugging Face Files & versions vs Ollama Model Details) */}
         {model.webToolUrl ? (

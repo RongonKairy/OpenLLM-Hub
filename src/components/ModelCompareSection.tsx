@@ -12,20 +12,27 @@ import {
 
 interface ModelCompareSectionProps {
   models: LLMModel[];
-  onOpenDetails: (model: LLMModel) => void;
+  onOpenDetails?: (model: LLMModel) => void;
   onDownloadModel: (model: LLMModel, quant: QuantizationOption) => void;
+  selectedModelAId?: string;
+  selectedModelBId?: string;
 }
 
 export const ModelCompareSection: React.FC<ModelCompareSectionProps> = ({
   models,
   onOpenDetails,
   onDownloadModel,
+  selectedModelAId,
+  selectedModelBId,
 }) => {
-  const [modelAId, setModelAId] = useState<string>(models[0]?.id || '');
-  const [modelBId, setModelBId] = useState<string>(models[1]?.id || '');
+  const [internalModelAId, setInternalModelAId] = useState<string>(models[0]?.id || '');
+  const [internalModelBId, setInternalModelBId] = useState<string>(models[1]?.id || '');
 
-  const modelA = models.find((m) => m.id === modelAId) || models[0];
-  const modelB = models.find((m) => m.id === modelBId) || models[1];
+  const effectiveModelAId = selectedModelAId || internalModelAId;
+  const effectiveModelBId = selectedModelBId || internalModelBId;
+
+  const modelA = models.find((m) => m.id === effectiveModelAId) || models[0] || ({} as LLMModel);
+  const modelB = models.find((m) => m.id === effectiveModelBId) || models[1] || models[0] || ({} as LLMModel);
 
   const compareMetrics = [
     {
@@ -35,8 +42,8 @@ export const ModelCompareSection: React.FC<ModelCompareSectionProps> = ({
     },
     {
       label: 'Parameter Size',
-      valA: modelA.parameterSize,
-      valB: modelB.parameterSize,
+      valA: `${modelA.parameterSize} (~${modelA.paramNumber}B)`,
+      valB: `${modelB.parameterSize} (~${modelB.paramNumber}B)`,
       better: modelA.paramNumber < modelB.paramNumber ? 'b' : 'a',
     },
     {
@@ -45,40 +52,56 @@ export const ModelCompareSection: React.FC<ModelCompareSectionProps> = ({
       valB: modelB.contextWindow,
     },
     {
+      label: 'Quantization Support',
+      valA: `${modelA.quantizations?.length || 0} formats (${modelA.quantizations?.map(q => q.format.replace('GGUF ', '')).join(', ') || 'N/A'})`,
+      valB: `${modelB.quantizations?.length || 0} formats (${modelB.quantizations?.map(q => q.format.replace('GGUF ', '')).join(', ') || 'N/A'})`,
+    },
+    {
+      label: 'Default Quantization Size',
+      valA: (modelA.quantizations?.find(q => q.isPopular) || modelA.quantizations?.[0])?.size || 'N/A',
+      valB: (modelB.quantizations?.find(q => q.isPopular) || modelB.quantizations?.[0])?.size || 'N/A',
+    },
+    {
       label: 'Minimum VRAM Requirement',
-      valA: `${modelA.minVramGb} GB`,
-      valB: `${modelB.minVramGb} GB`,
+      valA: modelA.minVramGb === 0 ? 'CPU RAM (4GB)' : `${modelA.minVramGb} GB`,
+      valB: modelB.minVramGb === 0 ? 'CPU RAM (4GB)' : `${modelB.minVramGb} GB`,
       better: modelA.minVramGb < modelB.minVramGb ? 'a' : 'b',
     },
     {
+      label: 'Recommended VRAM Requirement',
+      valA: `${modelA.recommendedVramGb} GB`,
+      valB: `${modelB.recommendedVramGb} GB`,
+      better: modelA.recommendedVramGb < modelB.recommendedVramGb ? 'a' : 'b',
+    },
+    {
       label: 'BanglaNLP Benchmark Score',
-      valA: `${modelA.benchmarks.banglaNlpScore}%`,
-      valB: `${modelB.benchmarks.banglaNlpScore}%`,
-      better: modelA.benchmarks.banglaNlpScore > modelB.benchmarks.banglaNlpScore ? 'a' : 'b',
+      valA: `${modelA.benchmarks?.banglaNlpScore || 0}%`,
+      valB: `${modelB.benchmarks?.banglaNlpScore || 0}%`,
+      better: (modelA.benchmarks?.banglaNlpScore || 0) > (modelB.benchmarks?.banglaNlpScore || 0) ? 'a' : 'b',
     },
     {
       label: 'HumanEval Coding Score',
-      valA: `${modelA.benchmarks.codingHumanEval}%`,
-      valB: `${modelB.benchmarks.codingHumanEval}%`,
-      better: modelA.benchmarks.codingHumanEval > modelB.benchmarks.codingHumanEval ? 'a' : 'b',
+      valA: `${modelA.benchmarks?.codingHumanEval || 0}%`,
+      valB: `${modelB.benchmarks?.codingHumanEval || 0}%`,
+      better: (modelA.benchmarks?.codingHumanEval || 0) > (modelB.benchmarks?.codingHumanEval || 0) ? 'a' : 'b',
     },
     {
       label: 'GSM8K Math Reasoning',
-      valA: `${modelA.benchmarks.mathGsm8k}%`,
-      valB: `${modelB.benchmarks.mathGsm8k}%`,
-      better: modelA.benchmarks.mathGsm8k > modelB.benchmarks.mathGsm8k ? 'a' : 'b',
+      valA: `${modelA.benchmarks?.mathGsm8k || 0}%`,
+      valB: `${modelB.benchmarks?.mathGsm8k || 0}%`,
+      better: (modelA.benchmarks?.mathGsm8k || 0) > (modelB.benchmarks?.mathGsm8k || 0) ? 'a' : 'b',
     },
     {
       label: 'MMLU General Knowledge',
-      valA: `${modelA.benchmarks.mmlu}%`,
-      valB: `${modelB.benchmarks.mmlu}%`,
-      better: modelA.benchmarks.mmlu > modelB.benchmarks.mmlu ? 'a' : 'b',
+      valA: `${modelA.benchmarks?.mmlu || 0}%`,
+      valB: `${modelB.benchmarks?.mmlu || 0}%`,
+      better: (modelA.benchmarks?.mmlu || 0) > (modelB.benchmarks?.mmlu || 0) ? 'a' : 'b',
     },
     {
       label: 'Inference Speed',
-      valA: `${modelA.benchmarks.tokensPerSec} tok/s`,
-      valB: `${modelB.benchmarks.tokensPerSec} tok/s`,
-      better: modelA.benchmarks.tokensPerSec > modelB.benchmarks.tokensPerSec ? 'a' : 'b',
+      valA: `${modelA.benchmarks?.tokensPerSec || 0} tok/s`,
+      valB: `${modelB.benchmarks?.tokensPerSec || 0} tok/s`,
+      better: (modelA.benchmarks?.tokensPerSec || 0) > (modelB.benchmarks?.tokensPerSec || 0) ? 'a' : 'b',
     },
     {
       label: 'License',
@@ -114,8 +137,8 @@ export const ModelCompareSection: React.FC<ModelCompareSectionProps> = ({
               First Model (A):
             </label>
             <select
-              value={modelAId}
-              onChange={(e) => setModelAId(e.target.value)}
+              value={effectiveModelAId}
+              onChange={(e) => setInternalModelAId(e.target.value)}
               className="w-full rounded-xl border border-white/10 bg-zinc-950 px-3.5 py-2.5 text-sm font-semibold text-white focus:border-blue-500 focus:outline-none cursor-pointer"
             >
               {models.map((m) => (
@@ -132,8 +155,8 @@ export const ModelCompareSection: React.FC<ModelCompareSectionProps> = ({
               Second Model (B):
             </label>
             <select
-              value={modelBId}
-              onChange={(e) => setModelBId(e.target.value)}
+              value={effectiveModelBId}
+              onChange={(e) => setInternalModelBId(e.target.value)}
               className="w-full rounded-xl border border-white/10 bg-zinc-950 px-3.5 py-2.5 text-sm font-semibold text-white focus:border-blue-500 focus:outline-none cursor-pointer"
             >
               {models.map((m) => (

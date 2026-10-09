@@ -7,6 +7,9 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { ModelCard } from './components/ModelCard';
+import { ModelCompareModal } from './components/ModelCompareModal';
+import { CompareFloatingBar } from './components/CompareFloatingBar';
+import { ModelCompareSection } from './components/ModelCompareSection';
 import { DownloadToast } from './components/DownloadToast';
 import { Footer } from './components/Footer';
 import { SocialModal } from './components/SocialModal';
@@ -30,6 +33,8 @@ export default function App() {
   const [paramFilter, setParamFilter] = useState<string>('all'); // all | small | medium | large
   const [sortBy, setSortBy] = useState<'popular' | 'downloads' | 'rating' | 'size'>('popular');
   const [isSocialModalOpen, setIsSocialModalOpen] = useState(false);
+  const [selectedCompareModels, setSelectedCompareModels] = useState<LLMModel[]>([]);
+  const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
 
   const allAvailableModels = MODELS_DATA;
 
@@ -134,6 +139,54 @@ export default function App() {
     setActiveDownload({ model, quant });
   };
 
+  const handleToggleCompare = (model: LLMModel) => {
+    setSelectedCompareModels((prev) => {
+      const exists = prev.some((m) => m.id === model.id);
+      if (exists) {
+        return prev.filter((m) => m.id !== model.id);
+      }
+      if (prev.length < 2) {
+        const next = [...prev, model];
+        if (next.length === 2) {
+          setIsCompareModalOpen(true);
+        }
+        return next;
+      }
+      // If 2 already selected, replace the older model and open compare modal
+      setIsCompareModalOpen(true);
+      return [prev[1], model];
+    });
+  };
+
+  const handleRemoveFromCompare = (modelId: string) => {
+    setSelectedCompareModels((prev) => prev.filter((m) => m.id !== modelId));
+  };
+
+  const handleClearCompare = () => {
+    setSelectedCompareModels([]);
+  };
+
+  const handleSwapCompareModels = () => {
+    setSelectedCompareModels((prev) => {
+      if (prev.length === 2) return [prev[1], prev[0]];
+      return prev;
+    });
+  };
+
+  const handleSelectModelA = (model: LLMModel) => {
+    setSelectedCompareModels((prev) => {
+      const modelB = prev[1] || allAvailableModels.find((m) => m.id !== model.id) || prev[0];
+      return [model, modelB];
+    });
+  };
+
+  const handleSelectModelB = (model: LLMModel) => {
+    setSelectedCompareModels((prev) => {
+      const modelA = prev[0] || allAvailableModels.find((m) => m.id !== model.id) || prev[1];
+      return [modelA, model];
+    });
+  };
+
   const scrollToModels = () => {
     setActiveSection('models-section');
     const el = document.getElementById('models-section');
@@ -160,6 +213,8 @@ export default function App() {
         onScrollToModels={scrollToModels}
         myLlmCount={myLlmCount}
         onOpenSocialModal={() => setIsSocialModalOpen(true)}
+        compareCount={selectedCompareModels.length}
+        onOpenCompareModal={() => setIsCompareModalOpen(true)}
       />
 
       {/* 2. Hero Section */}
@@ -346,6 +401,8 @@ export default function App() {
                 model={model}
                 onDownload={handleDownload}
                 onOpenSocialModal={() => setIsSocialModalOpen(true)}
+                isCompared={selectedCompareModels.some((m) => m.id === model.id)}
+                onToggleCompare={handleToggleCompare}
               />
             ))}
           </div>
@@ -374,10 +431,39 @@ export default function App() {
 
       </main>
 
+      {/* On-Page Side-by-Side Model Comparison Section */}
+      <ModelCompareSection
+        models={allAvailableModels}
+        selectedModelAId={selectedCompareModels[0]?.id}
+        selectedModelBId={selectedCompareModels[1]?.id}
+        onDownloadModel={handleDownload}
+      />
+
       {/* Global Footer */}
       <Footer
         onScrollTo={scrollToModels}
         onOpenSocialModal={() => setIsSocialModalOpen(true)}
+      />
+
+      {/* Sticky / Floating Model Compare Bar */}
+      <CompareFloatingBar
+        selectedModels={selectedCompareModels}
+        onRemoveModel={handleRemoveFromCompare}
+        onClearAll={handleClearCompare}
+        onOpenCompareModal={() => setIsCompareModalOpen(true)}
+      />
+
+      {/* Side-by-Side Technical Comparison Modal */}
+      <ModelCompareModal
+        isOpen={isCompareModalOpen}
+        onClose={() => setIsCompareModalOpen(false)}
+        modelA={selectedCompareModels[0] || null}
+        modelB={selectedCompareModels[1] || null}
+        allModels={allAvailableModels}
+        onSelectModelA={handleSelectModelA}
+        onSelectModelB={handleSelectModelB}
+        onSwapModels={handleSwapCompareModels}
+        onDownload={handleDownload}
       />
 
       {/* Creator Social Media Popup Modal */}

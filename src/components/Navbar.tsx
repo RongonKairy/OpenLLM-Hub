@@ -2,7 +2,8 @@ import React from 'react';
 import { 
   Sparkles, 
   Search,
-  Globe2
+  Globe2,
+  GitCompare
 } from 'lucide-react';
 import { ModelScope } from '../types';
 import { BrandLogo } from './BrandLogo';
@@ -18,6 +19,8 @@ interface NavbarProps {
   onScrollToModels: () => void;
   myLlmCount?: number;
   onOpenSocialModal: () => void;
+  compareCount?: number;
+  onOpenCompareModal?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -30,7 +33,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   totalDownloads,
   onScrollToModels,
   myLlmCount,
-  onOpenSocialModal
+  onOpenSocialModal,
+  compareCount = 0,
+  onOpenCompareModal
 }) => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/5 bg-black/70 backdrop-blur-xl transition-all">
@@ -144,6 +149,22 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </button>
           </div>
+
+          {/* Compare Button */}
+          {compareCount > 0 && onOpenCompareModal && (
+            <button
+              id="nav-compare-btn"
+              onClick={onOpenCompareModal}
+              className="flex items-center gap-1.5 rounded-xl bg-cyan-500/20 border border-cyan-400/50 hover:bg-cyan-500/30 text-cyan-200 px-3 py-1.5 text-xs font-bold transition-all cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.3)] animate-pulse"
+              title="View side-by-side technical specifications comparison"
+            >
+              <GitCompare className="h-3.5 w-3.5 text-cyan-300" />
+              <span>Compare</span>
+              <span className="rounded-full bg-cyan-400 text-black px-1.5 py-0.2 text-[10px] font-black">
+                {compareCount}/2
+              </span>
+            </button>
+          )}
 
           {/* Creator Profile Button */}
           <button

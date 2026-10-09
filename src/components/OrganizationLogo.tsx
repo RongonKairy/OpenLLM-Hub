@@ -152,7 +152,7 @@ export const OrganizationLogo: React.FC<OrganizationLogoProps> = ({
   }
 
   // 13. Rongon Kairy (Verified Creator)
-  if (normalized.includes('rongon') || normalized.includes('kairy') || normalized.includes('preatom') || normalized.includes('yt')) {
+  if (normalized.includes('rongon') || normalized.includes('kairy')) {
     return (
       <div className={`${containerClass} bg-gradient-to-br from-red-600 via-rose-700 to-zinc-950 text-white border border-red-400/50 shadow-[0_0_15px_rgba(239,68,68,0.4)]`} title="Rongon Kairy (Verified Creator)">
         <div className="flex items-center justify-center">

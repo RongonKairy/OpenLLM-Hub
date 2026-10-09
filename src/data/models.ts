@@ -1269,70 +1269,580 @@ print(response['message']['content'])`,
     ]
   },
   {
-    id: 'bengali-gemma-7b',
-    name: 'bengali-gemma:7b',
-    slug: 'bengali-gemma',
-    tagline: 'Specialized Bengali & Indic instruction-tuned model fine-tuned on native literature & STEM',
-    taglineBn: 'বাংলা ভাষা ও সাহিত্যের জন্য বিশেষভাবে ফাইন-টিউন করা ৭ বিলিয়ন প্যারামিটারের মডেল',
-    description: 'Bengali-Gemma 7B is optimized for Bengali cultural nuance, grammar, formal prose, and Bengali-to-English translation. Fine-tuned with verified Bengali dictionaries, textbooks, and conversation corpuses by Rongon Kairy.',
-    creator: 'Rongon Kairy',
-    avatarIcon: 'Sparkles',
-    baseArchitecture: 'Gemma 2 + Bengali Instruct Tuning',
-    parameterSize: '7B',
-    paramNumber: 7.0,
-    category: 'bengali-indic',
-    modelScope: 'my_llm',
+    id: 'mistral-small-24b',
+    name: 'mistral-small:24b',
+    slug: 'mistral-small',
+    tagline: 'Mistral AI flagship 24B open model with state-of-the-art reasoning and agentic function calling',
+    taglineBn: 'মিস্ট্রাল এআই-এর ২৪ বিলিয়ন প্যারামিটারের ফ্ল্যাগশিপ ওপেন রিজনিং মডেল',
+    description: 'Mistral Small 3 (24B) delivers frontier-grade conversational fluency, code synthesis, math problem solving, and low latency on 16GB-24GB consumer GPUs. Apache 2.0 licensed for open commercial usage.',
+    descriptionBn: '১৬ থেকে ২৪ জিবি জিপিউর জন্য মিস্ট্রাল এআই-এর ২৪বি সর্বাধুনিক ওপেন ওয়েট মডেল।',
+    creator: 'Mistral AI',
+    avatarIcon: 'Feather',
+    baseArchitecture: 'Mistral Small 3 (24B Dense)',
+    parameterSize: '24B',
+    paramNumber: 24.0,
+    category: 'reasoning',
+    modelScope: 'public',
     contextWindow: '32K',
     license: 'Apache-2.0',
-    releaseDate: '2026-03-01',
-    downloadsCount: 420000,
-    likesCount: 29000,
-    rating: 4.98,
+    releaseDate: '2026-02-10',
+    downloadsCount: 3950000,
+    likesCount: 112000,
+    rating: 4.97,
     isFeatured: true,
     isTrending: true,
     isNew: true,
     benchmarks: {
-      mmlu: 83.0,
-      codingHumanEval: 78.5,
-      mathGsm8k: 80.0,
-      banglaNlpScore: 94.8,
-      reasoningArc: 86.0,
-      tokensPerSec: 85
+      mmlu: 85.3,
+      codingHumanEval: 82.8,
+      mathGsm8k: 87.4,
+      banglaNlpScore: 84.0,
+      reasoningArc: 89.2,
+      tokensPerSec: 54
     },
-    minVramGb: 5.0,
+    minVramGb: 14.0,
+    recommendedVramGb: 16.0,
+    minCpuRamGb: 32.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '14.2 GB',
+        bytes: 15247130624,
+        filename: 'mistral-small-24b-instruct-2501-Q4_K_M.gguf',
+        downloadUrl: 'https://ollama.com/library/mistral-small',
+        recommendedVram: '16 GB VRAM (RTX 4080 / RTX 3090)',
+        recommendedFor: 'Complex reasoning, agentic planning, and full-stack software development',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run mistral-small:24b',
+    huggingFaceRepo: 'mistralai/Mistral-Small-24B-Instruct-2501',
+    pythonSnippet: `import ollama
+response = ollama.chat(
+    model='mistral-small:24b',
+    messages=[{'role': 'user', 'content': 'Design an event-driven architecture for a real-time trading feed'}]
+)
+print(response['message']['content'])`,
+    tags: ['Ollama', 'mistral', '24B', 'reasoning', 'coding', 'apache-2.0'],
+    features: [
+      'Superior reasoning on consumer 16GB GPUs',
+      'Advanced native function calling and structured outputs',
+      'Unrestricted Apache 2.0 commercial licensing'
+    ],
+    featuresBn: ['১৬ জিবি জিপিউতে দ্রুতগতির পারফরম্যান্স', 'টুল ও ফাংশন কলিংয়ে অত্যন্ত কার্যকর', 'অ্যাপাচি ২.০ ওপেন কমার্শিয়াল লাইসেন্স'],
+    trainingTokens: 'Mistral Foundation Multilingual Web Corpus',
+    samplePrompts: [
+      {
+        id: 'ms-small-p1',
+        title: 'Microservice Architecture Plan',
+        prompt: 'Design an event-driven Kafka architecture with idempotency keys and outbox pattern.',
+        response: '1. Transactional Outbox Pattern ensures dual-write consistency...\n2. Debezium CDC captures outbox records to Kafka topic...',
+        category: 'Architecture'
+      }
+    ]
+  },
+  {
+    id: 'deepseek-r1-14b',
+    name: 'deepseek-r1:14b',
+    slug: 'deepseek-r1',
+    tagline: 'Qwen-distilled 14B DeepSeek reasoning model with extreme math and algorithmic power',
+    taglineBn: '১৬ জিবি ভি-র‌্যামের জন্য পারফেক্ট ১৪ বিলিয়ন প্যারামিটারের ডিপ রিজনিং মডেল',
+    description: 'DeepSeek-R1-Distill-Qwen-14B delivers remarkable mathematical thinking traces, chain-of-thought derivations, and Olympiad-level logic while fitting smoothly inside standard 12GB-16GB VRAM GPUs.',
+    descriptionBn: '১২-১৬ জিবি জিপিউতে চলে এমন সবচেয়ে শক্তিশালী ১৪বি ম্যাথ ও রিজনিং মডেল।',
+    creator: 'DeepSeek',
+    avatarIcon: 'BrainCircuit',
+    baseArchitecture: 'Qwen-2.5 + DeepSeek R1 Distillation',
+    parameterSize: '14B',
+    paramNumber: 14.0,
+    category: 'reasoning',
+    modelScope: 'public',
+    contextWindow: '64K',
+    license: 'MIT',
+    releaseDate: '2026-02-12',
+    downloadsCount: 8400000,
+    likesCount: 195000,
+    rating: 4.96,
+    isFeatured: false,
+    isTrending: true,
+    isNew: true,
+    benchmarks: {
+      mmlu: 84.8,
+      codingHumanEval: 86.2,
+      mathGsm8k: 91.6,
+      banglaNlpScore: 82.5,
+      reasoningArc: 91.4,
+      tokensPerSec: 68
+    },
+    minVramGb: 8.5,
+    recommendedVramGb: 12.0,
+    minCpuRamGb: 24.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '8.98 GB',
+        bytes: 9642606592,
+        filename: 'deepseek-r1-distill-qwen-14b-Q4_K_M.gguf',
+        downloadUrl: 'https://ollama.com/library/deepseek-r1:14b',
+        recommendedVram: '10 GB - 12 GB VRAM (RTX 3060 / 4070)',
+        recommendedFor: 'Competitive programming, mathematical proofs, and chain-of-thought reasoning',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run deepseek-r1:14b',
+    huggingFaceRepo: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-14B',
+    pythonSnippet: `import ollama
+response = ollama.chat(
+    model='deepseek-r1:14b',
+    messages=[{'role': 'user', 'content': 'Prove that sqrt(2) is irrational using contradiction'}]
+)
+print(response['message']['content'])`,
+    tags: ['Ollama', 'deepseek-r1', '14B', 'reasoning', 'math', 'mit'],
+    features: [
+      'Full <think> chain-of-thought transparent reasoning traces',
+      'Fits comfortably on RTX 3060 12GB / RTX 4070 GPUs',
+      'Exceeds standard 70B non-reasoning models on AIME and GSM8K'
+    ],
+    featuresBn: ['সম্পূর্ণ চেইন-অব-থট চিন্তার ধারা প্রদর্শন করে', '১২ জিবি জিপিউতেই মসৃণভাবে চলে', 'ম্যাথ ও কোডিংয়ে অসাধারণ ফলাফল'],
+    trainingTokens: 'DeepSeek R1 Reasoning Traces on Qwen 2.5',
+    samplePrompts: [
+      {
+        id: 'r1-14b-p1',
+        title: 'Mathematical Induction Proof',
+        prompt: 'Prove by induction that 1 + 2 + ... + n = n(n+1)/2 for all positive integers n.',
+        response: '<think>\nBase case n=1: LHS=1, RHS=1(2)/2=1. True.\nInductive step: Assume true for n=k...\n</think>\nHere is the rigorous proof...',
+        category: 'Mathematics'
+      }
+    ]
+  },
+  {
+    id: 'deepseek-r1-32b',
+    name: 'deepseek-r1:32b',
+    slug: 'deepseek-r1',
+    tagline: 'High-density 32B distilled math and coding reasoning model matching frontier standards',
+    taglineBn: '৩২ বিলিয়ন প্যারামিটারের অ্যাডভান্সড ম্যাথ ও কোডিং রিজনিং পাওয়ারহাউস',
+    description: 'DeepSeek-R1-Distill-Qwen-32B captures the highest density of reasoning capabilities from the 671B DeepSeek-R1 model, achieving near-parity on complex theorem proving and coding contests.',
+    creator: 'DeepSeek',
+    avatarIcon: 'BrainCircuit',
+    baseArchitecture: 'Qwen-2.5 + DeepSeek R1 Distillation',
+    parameterSize: '32B',
+    paramNumber: 32.0,
+    category: 'reasoning',
+    modelScope: 'public',
+    contextWindow: '128K',
+    license: 'MIT',
+    releaseDate: '2026-02-14',
+    downloadsCount: 6200000,
+    likesCount: 148000,
+    rating: 4.97,
+    isFeatured: false,
+    isTrending: true,
+    isNew: true,
+    benchmarks: {
+      mmlu: 87.2,
+      codingHumanEval: 89.0,
+      mathGsm8k: 93.8,
+      banglaNlpScore: 85.0,
+      reasoningArc: 93.1,
+      tokensPerSec: 42
+    },
+    minVramGb: 18.0,
+    recommendedVramGb: 24.0,
+    minCpuRamGb: 48.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '19.8 GB',
+        bytes: 21260000000,
+        filename: 'deepseek-r1-distill-qwen-32b-Q4_K_M.gguf',
+        downloadUrl: 'https://ollama.com/library/deepseek-r1:32b',
+        recommendedVram: '24 GB VRAM (RTX 3090 / 4090 / Mac Studio)',
+        recommendedFor: 'Frontier reasoning tasks, complex code refactoring, and scientific simulation',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run deepseek-r1:32b',
+    huggingFaceRepo: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
+    pythonSnippet: `import ollama
+response = ollama.chat(
+    model='deepseek-r1:32b',
+    messages=[{'role': 'user', 'content': 'Solve the knapsack problem with dynamic programming and memory optimization in Rust'}]
+)
+print(response['message']['content'])`,
+    tags: ['Ollama', 'deepseek-r1', '32B', 'reasoning', 'coding', 'frontier'],
+    features: [
+      'Top-tier benchmark scores on AIME, MATH 500, and Codeforces',
+      'Deep thinking chain with self-correction',
+      'Unrestricted MIT license for private or commercial deployment'
+    ],
+    featuresBn: ['শীর্ষ সারির ম্যাথ ও কোডফোর্সেস স্কোর', 'স্বয়ংক্রিয় ভুল সংশোধন ও যৌক্তিক চিন্তা', 'সম্পূর্ণ এমআইটি লাইসেন্স'],
+    trainingTokens: 'DeepSeek R1 Cold-Start & RL Reasoning Corpus',
+    samplePrompts: [
+      {
+        id: 'r1-32b-p1',
+        title: 'Algorithmic Optimization in Rust',
+        prompt: 'Implement a memory-efficient zero-allocation parser for JSON stream in Rust.',
+        response: '<think>\nWe need a streaming state machine with byte slices...\n</think>\n```rust\nuse std::io::Read;\n// Zero-allocation parser implementation...\n```',
+        category: 'Algorithms'
+      }
+    ]
+  },
+  {
+    id: 'qwen2-5-72b',
+    name: 'qwen2.5:72b',
+    slug: 'qwen2.5',
+    tagline: 'Alibaba Cloud 72B flagship open foundation model rivaling leading proprietary APIs',
+    taglineBn: 'আলিবা ক্লাউডের ৭২ বিলিয়ন প্যারামিটারের ফ্ল্যাগশিপ ওপেন মডেল',
+    description: 'Qwen 2.5 72B is Alibaba Cloud\'s most versatile dense foundation model. Pre-trained on 18 trillion tokens with 128K context window, unmatched multi-language expertise, coding accuracy, and instruction obedience.',
+    creator: 'Qwen Team',
+    avatarIcon: 'Globe2',
+    baseArchitecture: 'Qwen 2.5 Dense 72B',
+    parameterSize: '72B',
+    paramNumber: 72.0,
+    category: 'general-chat',
+    modelScope: 'public',
+    contextWindow: '128K',
+    license: 'Apache-2.0',
+    releaseDate: '2025-10-20',
+    downloadsCount: 7100000,
+    likesCount: 164000,
+    rating: 4.97,
+    isFeatured: false,
+    isTrending: true,
+    isNew: false,
+    benchmarks: {
+      mmlu: 86.8,
+      codingHumanEval: 86.4,
+      mathGsm8k: 89.2,
+      banglaNlpScore: 89.0,
+      reasoningArc: 91.0,
+      tokensPerSec: 36
+    },
+    minVramGb: 40.0,
+    recommendedVramGb: 48.0,
+    minCpuRamGb: 64.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '43.2 GB',
+        bytes: 46385623040,
+        filename: 'qwen2.5-72b-instruct-Q4_K_M.gguf',
+        downloadUrl: 'https://ollama.com/library/qwen2.5:72b',
+        recommendedVram: '48 GB VRAM (2x RTX 3090 / Mac Studio 64GB)',
+        recommendedFor: 'Enterprise multi-lingual conversational AI, document drafting, and agent systems',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run qwen2.5:72b',
+    huggingFaceRepo: 'Qwen/Qwen2.5-72B-Instruct',
+    pythonSnippet: `import ollama
+response = ollama.chat(
+    model='qwen2.5:72b',
+    messages=[{'role': 'user', 'content': 'Provide an exhaustive strategic roadmap for enterprise AI governance'}]
+)
+print(response['message']['content'])`,
+    tags: ['Ollama', 'qwen', '72B', 'multilingual', 'enterprise', 'apache-2.0'],
+    features: [
+      '18 Trillion tokens pre-training with 128K context window',
+      'Fluent support for 29+ languages with cultural nuance',
+      'Apache 2.0 unrestricted commercial license'
+    ],
+    featuresBn: ['১৮ ট্রিলিয়ন টোকেনে প্রশিক্ষিত', '২৯টির বেশি ভাষায় অনবদ্য দক্ষতা', 'সম্পূর্ণ কমার্শিয়াল অ্যাপাচি ২.০ লাইসেন্স'],
+    trainingTokens: '18 Trillion High-Quality Multilingual Tokens',
+    samplePrompts: [
+      {
+        id: 'qwen72b-p1',
+        title: 'Executive AI Governance Framework',
+        prompt: 'Draft an executive policy paper on safe deployment of autonomous AI agents.',
+        response: '# Executive Framework for Autonomous Agent Deployment\n## 1. Principles of Least Privilege & Human In The Loop...',
+        category: 'Policy'
+      }
+    ]
+  },
+  {
+    id: 'llama-3-1-8b',
+    name: 'llama3.1:8b',
+    slug: 'llama3.1',
+    tagline: 'Meta industry-standard 8B general intelligence model with 128K context window',
+    taglineBn: 'মেটার জনপ্রিয় ৮ বিলিয়ন প্যারামিটারের ইন্ডাস্ট্রি স্ট্যান্ডার্ড মডেল',
+    description: 'Meta Llama 3.1 8B is the universal standard for local open-source LLM deployments. Featuring a massive 128K token context window, state-of-the-art multilingual support, tool use capabilities, and lightweight memory footprint.',
+    creator: 'Meta',
+    avatarIcon: 'Layers',
+    baseArchitecture: 'Llama 3.1 Architecture',
+    parameterSize: '8B',
+    paramNumber: 8.0,
+    category: 'general-chat',
+    modelScope: 'public',
+    contextWindow: '128K',
+    license: 'Llama 3.1 Community',
+    releaseDate: '2024-07-23',
+    downloadsCount: 19800000,
+    likesCount: 340000,
+    rating: 4.95,
+    isFeatured: false,
+    isTrending: false,
+    isNew: false,
+    benchmarks: {
+      mmlu: 73.0,
+      codingHumanEval: 72.8,
+      mathGsm8k: 77.0,
+      banglaNlpScore: 79.5,
+      reasoningArc: 82.0,
+      tokensPerSec: 96
+    },
+    minVramGb: 5.5,
     recommendedVramGb: 8.0,
     minCpuRamGb: 16.0,
     quantizations: [
       {
         format: 'GGUF Q4_K_M',
-        size: '4.7 GB',
-        bytes: 5046586368,
-        filename: 'bengali-gemma-7b-q4_k_m.gguf',
-        downloadUrl: 'https://ollama.com/library/gemma2:7b',
-        recommendedVram: '6 GB VRAM (GTX 1660 / RTX 3050)',
-        recommendedFor: 'Bengali creative writing, formal emails, official letters, and translation',
+        size: '4.92 GB',
+        bytes: 5282856960,
+        filename: 'Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf',
+        downloadUrl: 'https://ollama.com/library/llama3.1:8b',
+        recommendedVram: '6 GB - 8 GB VRAM (GTX 1660 / RTX 3060)',
+        recommendedFor: 'Daily general queries, document summarization, and local desktop AI',
         isPopular: true
       }
     ],
-    ollamaCommand: 'ollama run bengali-gemma:7b',
-    huggingFaceRepo: 'rongon/Bengali-Gemma-7B-Instruct',
-    pythonSnippet: `import ollama\nresponse = ollama.chat(model='bengali-gemma:7b', messages=[{'role': 'user', 'content': 'বাংলা সাহিত্যের ইতিহাসে রবীন্দ্রনাথ ঠাকুরের অবদান সম্পর্কে একটি প্রবন্ধ লিখুন'}])\nprint(response['message']['content'])`,
-    tags: ['My LLM', 'Ollama', 'bengali', 'indic', 'gemma', 'bangla', 'Rongon Kairy'],
+    ollamaCommand: 'ollama run llama3.1:8b',
+    huggingFaceRepo: 'meta-llama/Llama-3.1-8B-Instruct',
+    pythonSnippet: `import ollama
+response = ollama.chat(
+    model='llama3.1:8b',
+    messages=[{'role': 'user', 'content': 'Summarize the core tenets of stoic philosophy in 3 bullet points'}]
+)
+print(response['message']['content'])`,
+    tags: ['Ollama', 'llama', 'meta', '8B', '128K', 'popular'],
     features: [
-      'Highest Bengali NLP benchmark score (94.8%)',
-      'Deep understanding of colloquial, formal, and poetic Bengali',
-      'Fast inference on laptop GPUs or CPU RAM'
+      'Huge 128K context window for long documents',
+      'Over 19M downloads across all deployment platforms',
+      'Fast 90+ tokens/sec on modern consumer GPUs'
     ],
-    featuresBn: ['বাংলা ব্যাকরণ ও প্রমিত ভাষা শৈলীতে শীর্ষস্থানীয়', '৯৪.৮% বাংলা এনএলপি স্কোর', 'রঙ্গন কাইরী কর্তৃক কিউরেটেড'],
-    trainingTokens: 'High-Purity Bengali & Multilingual Corpus',
+    featuresBn: ['১২৮কে দীর্ঘ কনটেক্সট উইন্ডো', '১৯ মিলিয়নের বেশি ডাউনলোড', 'কম্পিউটারে অতি দ্রুতগতির রেসপন্স'],
+    trainingTokens: '15 Trillion Diverse Multilingual Tokens',
     samplePrompts: [
       {
-        id: 'bn-gemma-p1',
-        title: 'বাংলা অফিসিয়াল আবেদনপত্র',
-        titleBn: 'বাংলা অফিসিয়াল আবেদনপত্র লিখন',
-        prompt: 'শিক্ষা প্রতিষ্ঠানের প্রধানের নিকট বিজ্ঞান মেলার অনুমতির জন্য একটি আনুষ্ঠানিক আবেদনপত্র লিখুন।',
-        response: 'বরাবর,\nঅধ্যক্ষ মহোদয়,\n...\nবিনীত নিবেদন এই যে, আমাদের প্রতিষ্ঠানে আগামী সপ্তাহে তিন দিনব্যাপী বিজ্ঞান মেলা আয়োজন করতে আগ্রহী...',
-        category: 'Bengali'
+        id: 'llama31-p1',
+        title: 'Core Philosophical Principles',
+        prompt: 'Summarize the core tenets of stoicism and how to apply them to modern software engineering.',
+        response: '1. Dichotomy of Control: Focus on code you write, not server outages...\n2. Voluntary Discomfort: Refactor legacy systems with discipline...',
+        category: 'Philosophy'
+      }
+    ]
+  },
+  {
+    id: 'phi-4-mini-3-8b',
+    name: 'phi4-mini:3.8b',
+    slug: 'phi4-mini',
+    tagline: 'Microsoft ultra-compact 3.8B high-density reasoning model optimized for laptops and phones',
+    taglineBn: 'মাইক্রোসফটের হালকা ৩.৮ বিলিয়ন প্যারামিটারের শক্তিশালী এজ মডেল',
+    description: 'Microsoft Phi-4-mini packs remarkable reasoning, math, and code comprehension into a featherweight 3.8B footprint. Requires under 3GB VRAM, making high-end intelligence accessible on any laptop.',
+    creator: 'Microsoft',
+    avatarIcon: 'Cpu',
+    baseArchitecture: 'Phi-4 Compact Transformer',
+    parameterSize: '3.8B',
+    paramNumber: 3.8,
+    category: 'edge-lightweight',
+    modelScope: 'public',
+    contextWindow: '128K',
+    license: 'MIT',
+    releaseDate: '2026-02-26',
+    downloadsCount: 2900000,
+    likesCount: 88000,
+    rating: 4.94,
+    isFeatured: false,
+    isTrending: true,
+    isNew: true,
+    benchmarks: {
+      mmlu: 78.4,
+      codingHumanEval: 76.5,
+      mathGsm8k: 84.2,
+      banglaNlpScore: 76.0,
+      reasoningArc: 85.0,
+      tokensPerSec: 120
+    },
+    minVramGb: 2.8,
+    recommendedVramGb: 4.0,
+    minCpuRamGb: 8.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '2.49 GB',
+        bytes: 2673868800,
+        filename: 'phi-4-mini-instruct-Q4_K_M.gguf',
+        downloadUrl: 'https://ollama.com/library/phi4-mini',
+        recommendedVram: '4 GB VRAM / Integrated Intel/AMD GPU',
+        recommendedFor: 'Edge devices, laptops, mobile workflows, and background agent tasks',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run phi4-mini:3.8b',
+    huggingFaceRepo: 'microsoft/Phi-4-mini-instruct',
+    pythonSnippet: `import ollama
+response = ollama.chat(
+    model='phi4-mini:3.8b',
+    messages=[{'role': 'user', 'content': 'Explain how quantum entanglement works using an analogy with a pair of socks'}]
+)
+print(response['message']['content'])`,
+    tags: ['Ollama', 'microsoft', 'phi4', 'edge', '3.8B', 'mit'],
+    features: [
+      'Ultra-light 2.5GB model file runs on almost any PC or Mac',
+      'Over 120 tokens/sec lightning speed on modern chips',
+      'Full MIT license for unlimited commercial innovation'
+    ],
+    featuresBn: ['মাত্র ২.৫ জিবি সাইজ, সাধারণ ল্যাপটপেও চলে', 'প্রতি সেকেন্ডে ১২০+ টোকেন স্পিড', 'এমআইটি ওপেন সোর্স লাইসেন্স'],
+    trainingTokens: 'High-Density Synthetic & Web Reasoning Mix',
+    samplePrompts: [
+      {
+        id: 'phi4m-p1',
+        title: 'Quantum Physics Analogy',
+        prompt: 'Explain quantum entanglement simply for high school students.',
+        response: 'Imagine you have a pair of shoes in separate identical boxes...\nAs soon as you open box A and see a left shoe, you instantly know box B has the right shoe...',
+        category: 'Education'
+      }
+    ]
+  },
+  {
+    id: 'hermes-3-8b',
+    name: 'hermes3:8b',
+    slug: 'hermes3',
+    tagline: 'Nous Research autonomous agent model with state-of-the-art tool orchestration',
+    taglineBn: 'নৌস রিসার্চের এজেন্ট ও অ্যাডভান্সড টুল কলিং সমৃদ্ধ মডেল',
+    description: 'Nous Hermes 3 8B is built for developers creating autonomous AI agents. Fine-tuned with rigorous JSON schemas, multi-turn tool calling, roleplaying adaptability, and uncensored analytical exploration.',
+    creator: 'Nous Research',
+    avatarIcon: 'Bot',
+    baseArchitecture: 'Llama 3.1 + Hermes 3 Agent Tuning',
+    parameterSize: '8B',
+    paramNumber: 8.0,
+    category: 'reasoning',
+    modelScope: 'public',
+    contextWindow: '128K',
+    license: 'Apache-2.0',
+    releaseDate: '2025-08-15',
+    downloadsCount: 4100000,
+    likesCount: 97000,
+    rating: 4.93,
+    isFeatured: false,
+    isTrending: false,
+    isNew: false,
+    benchmarks: {
+      mmlu: 75.2,
+      codingHumanEval: 76.8,
+      mathGsm8k: 80.4,
+      banglaNlpScore: 78.5,
+      reasoningArc: 84.0,
+      tokensPerSec: 92
+    },
+    minVramGb: 5.5,
+    recommendedVramGb: 8.0,
+    minCpuRamGb: 16.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '4.92 GB',
+        bytes: 5282856960,
+        filename: 'Hermes-3-Llama-3.1-8B-Q4_K_M.gguf',
+        downloadUrl: 'https://ollama.com/library/hermes3:8b',
+        recommendedVram: '6 GB - 8 GB VRAM',
+        recommendedFor: 'Autonomous AI agents, function calling APIs, and structured JSON extraction',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run hermes3:8b',
+    huggingFaceRepo: 'NousResearch/Hermes-3-Llama-3.1-8B',
+    pythonSnippet: `import ollama
+response = ollama.chat(
+    model='hermes3:8b',
+    messages=[{'role': 'user', 'content': 'Generate a schema-compliant tool call to fetch stock prices for AAPL and MSFT'}]
+)
+print(response['message']['content'])`,
+    tags: ['Ollama', 'hermes', 'agent', 'tool-calling', '8B', 'nous-research'],
+    features: [
+      'Pioneer in open structured tool and function calling',
+      'Rich multi-step agentic conversation memory',
+      'Uncensored, objective research reasoning'
+    ],
+    featuresBn: ['টুল ও ফাংশন কলিংয়ে শীর্ষস্থানীয়', 'মাল্টি-স্টেপ এজেন্ট মেমরি সাপোর্ট', 'নৌস রিসার্চের আধুনিক ফাইন-টিউনিং'],
+    trainingTokens: 'Hermes 3 Agentic & Structured Dataset',
+    samplePrompts: [
+      {
+        id: 'hermes-p1',
+        title: 'Autonomous Tool Call Generation',
+        prompt: 'Call the weather service API for Dhaka and Chittagong with unit=celsius.',
+        response: '{\n  "function": "get_weather_batch",\n  "parameters": {\n    "locations": ["Dhaka", "Chittagong"],\n    "unit": "celsius"\n  }\n}',
+        category: 'Agent Tools'
+      }
+    ]
+  },
+  {
+    id: 'nemotron-mini-4b',
+    name: 'nemotron-mini:4b',
+    slug: 'nemotron-mini',
+    tagline: 'NVIDIA high-efficiency 4B SLM tailored for on-device reasoning and RAG pipelines',
+    taglineBn: 'এনভিডিয়ার ৪ বিলিয়ন প্যারামিটারের অন-ডিভাইস আরএজি ও টুল মডেল',
+    description: 'NVIDIA Nemotron-Mini-4B-Instruct is optimized for low-latency inference on RTX AI PCs. Delivers high accuracy in retrieval-augmented generation (RAG), conversational roleplay, and localized automation.',
+    creator: 'NVIDIA',
+    avatarIcon: 'Cpu',
+    baseArchitecture: 'Nemotron Architecture',
+    parameterSize: '4B',
+    paramNumber: 4.0,
+    category: 'edge-lightweight',
+    modelScope: 'public',
+    contextWindow: '4K',
+    license: 'NVIDIA Open Model License',
+    releaseDate: '2025-09-18',
+    downloadsCount: 1650000,
+    likesCount: 42000,
+    rating: 4.91,
+    isFeatured: false,
+    isTrending: false,
+    isNew: false,
+    benchmarks: {
+      mmlu: 68.5,
+      codingHumanEval: 64.0,
+      mathGsm8k: 72.0,
+      banglaNlpScore: 72.0,
+      reasoningArc: 78.5,
+      tokensPerSec: 130
+    },
+    minVramGb: 3.2,
+    recommendedVramGb: 4.5,
+    minCpuRamGb: 8.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '2.68 GB',
+        bytes: 2877685760,
+        filename: 'Nemotron-Mini-4B-Instruct-Q4_K_M.gguf',
+        downloadUrl: 'https://ollama.com/library/nemotron-mini',
+        recommendedVram: '4 GB VRAM / NVIDIA RTX Laptop',
+        recommendedFor: 'Local desktop RAG, personal assistants, and on-device knowledge retrieval',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run nemotron-mini:4b',
+    huggingFaceRepo: 'nvidia/Nemotron-Mini-4B-Instruct',
+    pythonSnippet: `import ollama
+response = ollama.chat(
+    model='nemotron-mini:4b',
+    messages=[{'role': 'user', 'content': 'Summarize recent advancements in NVIDIA TensorRT-LLM quantization'}]
+)
+print(response['message']['content'])`,
+    tags: ['Ollama', 'nvidia', 'edge', 'rag', '4B', 'nemotron'],
+    features: [
+      'Tailored by NVIDIA engineers for RTX PC local acceleration',
+      'High accuracy on document Q&A and RAG benchmarks',
+      'Ultra-compact 2.7GB download'
+    ],
+    featuresBn: ['এনভিডিয়া আরটিএক্স জিপিউর জন্য অপ্টিমাইজড', 'ডকুমেন্ট প্রশ্নোত্তর ও আরএজি সিস্টেমে পারফেক্ট', 'মাত্র ২.৭ জিবি ডাউনলোড সাইজ'],
+    trainingTokens: 'NVIDIA Curated Synthetic & Instruction Dataset',
+    samplePrompts: [
+      {
+        id: 'nemotron-p1',
+        title: 'Local Contextual RAG Query',
+        prompt: 'Given employee handbook context, what is the policy on remote work expense reimbursements?',
+        response: 'According to Section 4.2 of the handbook, eligible remote employees receive up to $50/month...',
+        category: 'RAG'
       }
     ]
   },
@@ -3954,6 +4464,142 @@ llm = Llama.from_pretrained(
         prompt: 'Write an atmospheric cyberpunk prologue set in a rainy neon metropolis.',
         response: 'Acid rain hissed against the carbon-fiber eaves of Neo-Kowloon as holographic billboards flickered...',
         category: 'Creative'
+      }
+    ]
+  },
+  {
+    id: 'hf-qwen-2-5-72b-gguf',
+    name: 'Qwen2.5-72B-Instruct-GGUF (bartowski)',
+    slug: 'hf-qwen-2-5-72b-gguf',
+    tagline: 'Alibaba Cloud 72B flagship open powerhouse quantized in high-precision GGUF',
+    taglineBn: 'আলিবা ক্লাউডের ৭২বি ফ্ল্যাগশিপ মডেলের হাই-প্রেসিশন জিজিইউএফ কোয়ান্টাইজেশন',
+    description: 'Qwen2.5-72B-Instruct GGUF quantized by bartowski. Delivers proprietary-grade multi-lingual writing, math reasoning, and complex coding with 128K context window support.',
+    creator: 'bartowski',
+    avatarIcon: 'Globe2',
+    baseArchitecture: 'Qwen 2.5 72B',
+    parameterSize: '72.7B',
+    paramNumber: 72.7,
+    category: 'huggingface-llm',
+    modelScope: 'public',
+    contextWindow: '128K',
+    license: 'Apache 2.0',
+    releaseDate: '2025-10-25',
+    downloadsCount: 2840000,
+    likesCount: 89000,
+    rating: 4.98,
+    isFeatured: true,
+    isTrending: true,
+    isNew: false,
+    benchmarks: {
+      mmlu: 86.8,
+      codingHumanEval: 86.4,
+      mathGsm8k: 89.2,
+      banglaNlpScore: 89.0,
+      reasoningArc: 91.0,
+      tokensPerSec: 36
+    },
+    minVramGb: 40.0,
+    recommendedVramGb: 48.0,
+    minCpuRamGb: 64.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '43.2 GB',
+        bytes: 46385623040,
+        filename: 'Qwen2.5-72B-Instruct-Q4_K_M.gguf',
+        downloadUrl: 'https://huggingface.co/bartowski/Qwen2.5-72B-Instruct-GGUF/tree/main',
+        recommendedVram: '48 GB VRAM / Mac Studio (64GB)',
+        recommendedFor: 'Enterprise AI assistants, full codebase analysis, and research workflows',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run qwen2.5:72b',
+    huggingFaceRepo: 'bartowski/Qwen2.5-72B-Instruct-GGUF',
+    pythonSnippet: `from llama_cpp import Llama
+llm = Llama.from_pretrained(
+    repo_id="bartowski/Qwen2.5-72B-Instruct-GGUF",
+    filename="Qwen2.5-72B-Instruct-Q4_K_M.gguf",
+    n_ctx=16384
+)`,
+    tags: ['HuggingFace', 'trending', 'GGUF', 'bartowski', 'qwen', '72B', 'apache-2.0'],
+    features: ['128K token context window', 'Apache 2.0 commercial license', 'State of the art multilingual reasoning'],
+    featuresBn: ['১২৮কে কনটেক্সট উইন্ডো', 'অ্যাপাচি ২.০ ওপেন লাইসেন্স', 'বহুভাষিক বুদ্ধিমত্তায় শীর্ষস্থান'],
+    trainingTokens: '18 Trillion High-Quality Tokens',
+    samplePrompts: [
+      {
+        id: 'hf-qwen72-1',
+        title: 'Deep System Architecture',
+        prompt: 'Design a distributed consensus mechanism resilient against Byzantine faults with zero message loss.',
+        response: '1. Quorum Configuration & Epoch Transitions...\n2. Raft-style commit pipeline with threshold signatures...',
+        category: 'Distributed Systems'
+      }
+    ]
+  },
+  {
+    id: 'hf-deepseek-r1-qwen-32b-gguf',
+    name: 'DeepSeek-R1-Distill-Qwen-32B-GGUF (bartowski)',
+    slug: 'hf-deepseek-r1-qwen-32b-gguf',
+    tagline: 'High-density 32B DeepSeek distilled reasoning model in ready-to-run GGUF',
+    taglineBn: 'ডিপসিক-আর১ ৩২বি ডিস্টিল্ড রিজনিং মডেলের অফিশিয়াল জিজিইউএফ',
+    description: 'DeepSeek-R1-Distill-Qwen-32B GGUF quantized by bartowski. Delivers extraordinary chain-of-thought mathematical and algorithmic problem solving with full thinking trace transparency.',
+    creator: 'bartowski',
+    avatarIcon: 'BrainCircuit',
+    baseArchitecture: 'Qwen 2.5 + DeepSeek R1 Distill',
+    parameterSize: '32.8B',
+    paramNumber: 32.8,
+    category: 'huggingface-llm',
+    modelScope: 'public',
+    contextWindow: '128K',
+    license: 'MIT',
+    releaseDate: '2026-02-14',
+    downloadsCount: 3100000,
+    likesCount: 96000,
+    rating: 4.97,
+    isFeatured: true,
+    isTrending: true,
+    isNew: true,
+    benchmarks: {
+      mmlu: 87.2,
+      codingHumanEval: 89.0,
+      mathGsm8k: 93.8,
+      banglaNlpScore: 85.0,
+      reasoningArc: 93.1,
+      tokensPerSec: 42
+    },
+    minVramGb: 18.0,
+    recommendedVramGb: 24.0,
+    minCpuRamGb: 48.0,
+    quantizations: [
+      {
+        format: 'GGUF Q4_K_M',
+        size: '19.8 GB',
+        bytes: 21260000000,
+        filename: 'DeepSeek-R1-Distill-Qwen-32B-Q4_K_M.gguf',
+        downloadUrl: 'https://huggingface.co/bartowski/DeepSeek-R1-Distill-Qwen-32B-GGUF/tree/main',
+        recommendedVram: '24 GB VRAM (RTX 3090 / 4090 / Mac Studio)',
+        recommendedFor: 'Frontier competitive programming, theorem proofs, and deep analytical reasoning',
+        isPopular: true
+      }
+    ],
+    ollamaCommand: 'ollama run deepseek-r1:32b',
+    huggingFaceRepo: 'bartowski/DeepSeek-R1-Distill-Qwen-32B-GGUF',
+    pythonSnippet: `from llama_cpp import Llama
+llm = Llama.from_pretrained(
+    repo_id="bartowski/DeepSeek-R1-Distill-Qwen-32B-GGUF",
+    filename="DeepSeek-R1-Distill-Qwen-32B-Q4_K_M.gguf",
+    n_ctx=16384
+)`,
+    tags: ['HuggingFace', 'trending', 'GGUF', 'bartowski', 'deepseek-r1', '32B', 'mit'],
+    features: ['Transparent <think> chain-of-thought derivations', 'Fits within 24GB VRAM', 'Unrestricted MIT license'],
+    featuresBn: ['স্বচ্ছ চেইন-অব-থট চিন্তার ধারা', '২৪ জিবি জিপিউতেই মসৃণভাবে চলে', 'এমআইটি ওপেন সোর্স লাইসেন্স'],
+    trainingTokens: 'DeepSeek R1 Cold Start & RL Traces',
+    samplePrompts: [
+      {
+        id: 'hf-r1-32b-1',
+        title: 'Number Theory Theorem Proof',
+        prompt: 'Prove Wilson\'s Theorem: (p - 1)! = -1 (mod p) for every prime p.',
+        response: '<think>\nFor p=2, (2-1)! = 1 = -1 (mod 2). For p > 2, group elements into pairs of modular inverses...\n</think>\nHere is the complete step-by-step proof...',
+        category: 'Mathematics'
       }
     ]
   }

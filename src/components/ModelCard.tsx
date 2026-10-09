@@ -82,7 +82,7 @@ export const ModelCard: React.FC<ModelCardProps> = ({
               </div>
               <p className="text-xs text-zinc-400">
                 {model.baseArchitecture} •{' '}
-                {(model.creator === 'Rongon Kairy' || model.creator === 'Preatom YT') && onOpenSocialModal ? (
+                {model.creator === 'Rongon Kairy' && onOpenSocialModal ? (
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
